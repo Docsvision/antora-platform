@@ -11,7 +11,7 @@
 :r-img: storage-file-stream-rule
 :sample-img: storage-file-stream
 :sample: fStream
-include::partial$storageSample.adoc[]
+include::admin:partial$storageSample.adoc[]
 
 :location: файловой системе
 :s-name: StorageInFileSystem
@@ -23,4 +23,7 @@ include::partial$storageSample.adoc[]
 :r-img: storage-file-system-rule
 :sample-img: storage-file-system
 :sample: fSystem
-include::partial$storageSample.adoc[]
+include::admin:partial$storageSample.adoc[tags=base]
+.. В поле _Путь_ введите полный путь к каталогу для хранения бинарных данных файлов на сервере {dv}.
++
+include::admin:partial$storageSample.adoc[tags=end]
