@@ -1,6 +1,6 @@
 = Установка серверной части модуля {pl}
 
-include::installguide:ROOT:partial$doNotStart.adoc[]
+include::partial$doNotStart.adoc[]
 
 Пользователь, выполняющий установку, должен обладать правами администратора.
 

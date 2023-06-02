@@ -8,17 +8,17 @@
 
 Если для подключения к БД {dv} планируется использовать аутентификацию Windows, у пользователя от имени которого запущена _{cns}_, должны быть следующие права в СУБД:
 
-include::installguide::partial$dbRights.adoc[]
+include::partial$dbRights.adoc[]
 
 Подробнее про использование аутентификации см. в разделе xref:db-authentication.adoc[].
 
-include::installguide::page$config-master.adoc[tags=master]
+include::5.5.5@platform:admin:partial$config-master.adoc[tags=master]
 +
 .Настройка веб-приложения {dv}
 image::config-master-web-server.png[Настройка веб-приложения {dv}]
 +
 [#database]
-include::installguide::page$config-master.adoc[tags=dbase]
+include::5.5.5@platform:admin:partial$config-master.adoc[tags=dbase]
 +
 * Если вы обновляете {dv}, следуйте инструкции в пункте xref:5.5.5@platform:admin:update-module.adoc[].
 +
@@ -40,7 +40,7 @@ image::config-master-performance.png[Окно "Настройки {wincl}а"]
 .Загрузка стандартной конфигурации модулей {dv}
 image::platform:admin:document-management.png[Загрузка стандартной конфигурации модулей {dv}]
 +
-include::installguide::partial$takesTime.adoc[]
+include::partial$takesTime.adoc[]
 +
 . Согласитесь с загрузкой стандартной конфигурации модуля _Базовые объекты_.
 +
