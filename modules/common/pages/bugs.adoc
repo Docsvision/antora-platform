@@ -1,6 +1,6 @@
 = Исправленные ошибки
 
-include::webclient:admin:partial$table.adoc[]
+include::5.5.17@webclient:admin:partial$table.adoc[]
 |ERR-3872 (SUP-7522)
 |В документации не было указано, что адрес _{of-mc}_ в _{cns}_ необходимо указывать с `/api` в конце.
 
