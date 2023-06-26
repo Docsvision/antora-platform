@@ -14,7 +14,9 @@
 . {iis}. В настройках сервера должна быть включена поддержка {asp} в IIS.
 . Microsoft .NET Framework {net-v1} или выше.
 . Microsoft .NET Framework {net-v2}.
-. https://www.cryptopro.ru/products/net/downloads[КриптоПро .NET], когда планируется использовать авторизацию с помощью xref:5.5.5@platform:admin:authorization-extensions.adoc#esia[расширения аутентификации ЕСИА]. Требует лицензии КриптоПро .NET.
+. https://www.cryptopro.ru/products/net/downloads[КриптоПро .NET Сервер], когда планируется использовать авторизацию с помощью xref:5.5.5@platform:admin:authorization-extensions.adoc#esia[расширения аутентификации ЕСИА].
++
+WARNING: Во избежание ошибок КриптоПро .NET Сервер необходимо устанавливать только после приобретения лицензии.
 
 [#client]
 == Требования клиентской части модуля
