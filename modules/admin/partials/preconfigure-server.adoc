@@ -107,7 +107,7 @@ NOTE: Если данный параметр отключен, то процед
 +
 * _timezone_ на _Europe/Moscow_,
 * _lc_messages_ на _en_US.UTF-8_.
-* `standard_conforming_strings` переведите в значение `On`.
+* _standard_conforming_strings_ переведите в значение `On`.
 +
 . Сохраните изменения.
 . Установите службу <<pgAgent,PgAgent>>.
