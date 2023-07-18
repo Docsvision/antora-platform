@@ -1,6 +1,6 @@
 = Необходимое техническое обеспечение
 
-include::dev@webclient:ROOT:page$requirements-hardware.adoc[tags=sum]
+include::webclient:ROOT:page$requirements-hardware.adoc[tags=sum]
 
 [#server]
 == Требования серверной части модуля
