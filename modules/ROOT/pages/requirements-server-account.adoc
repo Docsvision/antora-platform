@@ -11,7 +11,7 @@
  setx DV_SystemUserAccount account@domain.com
  setx DV_SystemUserPassword password
 
-// * Членство в группе *Perfomance Monitor Users*. Членство в группах настраивается в конфигурационном файле модуля {pl}. Подробнее см. в документации модуля {pl}, раздел "xref:6.1@platform:admin:config-platform.adoc[]".
+// * Членство в группе *Perfomance Monitor Users*. Членство в группах настраивается в конфигурационном файле модуля {pl}. Подробнее см. в документации модуля {pl}, раздел "xref:dev@platform:admin:config-platform.adoc[]".
 // * Полные права на системную папку для временных файлов (по умолчанию папка `c:\Windows\Temp`).
 // * Права на чтение веток реестра ОС:
 // +
