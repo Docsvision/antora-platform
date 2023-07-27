@@ -31,4 +31,6 @@ include::admin:partial$storageSample.adoc[]
 include::admin:partial$storageSample.adoc[tags=base]
 .. В поле _Путь_ введите полный путь к каталогу для хранения бинарных данных файлов на сервере {dv}.
 +
+include::partial$excerpts.adoc[tags=twobasesonepath]
++
 include::admin:partial$storageSample.adoc[tags=end]
