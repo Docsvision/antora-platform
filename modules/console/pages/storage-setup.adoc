@@ -113,6 +113,8 @@ include::admin:partial$excerpts.adoc[tags=storageLimits]
 ****
 .Для типа "Хранилище на диске":
 * _Путь_ -- расположение каталога в файловой системе для сохранения бинарных данных файлов.
+// +
+// include::partial$excerpts.adoc[tags=twobasesonepath]
 
 .Для типа "Хранилище во внешней базе Microsoft SQL Server":
 * _Строка соединения_ -- строка соединения с БД в формате
