@@ -1,3 +1,15 @@
+// tag::pgagent[]
+[NOTE]
+====
+При использовании Postgres Pro Standard потребуется скопировать расширение в директорию Postgres Pro, с помощью команды:
+
+[source,bash]
+----
+cp /usr/share/postgresql/11/extension/pgagent* /opt/pgpro/std-15/share/extension/
+----
+====
+// end::pgagent[]
+
 //tag::delete-wf-settings[]
 Если БД была удалена через _{cns}_, при открытии раздела _{wf}_ появится запрос на удаление настроек, связанных с удалённой БД: "База данных не зарегистрирована в системе {dv}. Удалить настройки {wf}, связанные с базой данных"?
 
