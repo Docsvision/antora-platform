@@ -1,6 +1,6 @@
 = Управление лицензиями
 
-include::dev@system:ROOT:partial$excerpts.adoc[tags=activation]
+include::dev@system::partial$excerpts.adoc[tags=activation]
 
 [#licenseActivation]
 == Активация лицензии {dv}
