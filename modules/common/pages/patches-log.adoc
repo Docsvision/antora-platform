@@ -1,1 +1,1 @@
-include::system::partial$patches.adoc[]
+include::dev@system::partial$patches.adoc[]
