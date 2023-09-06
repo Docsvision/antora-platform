@@ -33,7 +33,7 @@ NOTE: Если данный параметр отключен, то процед
 * _standard_conforming_strings_ переведите в значение `On`.
 +
 . Сохраните изменения.
-. Установите службу <<pgAgent,PgAgent>>.
+. Установите службу <<pg-agent,PgAgent>>.
 . Если для подключения к PostgreSQL планируется использовать аутентификацию Windows, необходима <<pgSqlWindowsAuthentication,дополнительная настройка СУБД>>.
 . Для пользователя, от имени которого будет выполняться инициализация БД при первоначальной настройке {dv} и последующее управление, необходимы права `SUPERUSER`.
 
@@ -58,8 +58,7 @@ host all all all sspi map=mymap
 host all all all md5
 ----
 +
-[#register]
-. В файл `pg_ident.conf` добавьте строки сопоставления пользователей Windows с пользователями СУБД, созданными <<users,ранее>>:
+. [[register]]В файл `pg_ident.conf` добавьте строки сопоставления пользователей Windows с пользователями СУБД, созданными <<users,ранее>>:
 +
 [source]
 ----
@@ -85,7 +84,7 @@ C:\PROGRA~2\pgAgent\bin\pgagent.exe RUN pgAgent host=localhost port=5432 user=po
 За более детальной информацией по использованию аутентификации Windows в PostgreSQL обратитесь к документации PostgreSQL или другим ресурсам.
 ====
 
-[#pgAgent]
+[#pg-agent]
 === Установка службы PgAgent
 
 . Службу _PgAgent_ предпочтительно устанавливать на сервер с СУБД PostgreSQL. https://www.pgadmin.org/docs/pgadmin4/4.x/pgagent_install.html[Отдельная установка] возможна, но не рекомендуется.
