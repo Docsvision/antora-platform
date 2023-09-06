@@ -1,0 +1,5 @@
+= Раздел "{wf}"
+
+В данном разделе представлены настройки модуля _{wf}_. Настройка модуля подробно описана в документации по администрированию модуля _{wf}_, в разделе "xref:dev@workflow:admin:console.adoc[]".
+
+include::admin:partial$excerpts.adoc[tags=delete-wf-settings]
