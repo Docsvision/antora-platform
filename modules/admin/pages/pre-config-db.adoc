@@ -142,8 +142,8 @@ mymap service@COMPANY service <.> <.>
 mymap petrov.b@COMPANY petrov.b
 mymap postgres@COMPANY postgres <.>
 ----
-<.> имя-пользователя-в-домене@название-домена.
-<.> service -- имя пользователя в СУБД PostgreSQL.
+<.> пользователь@ДОМЕН.
+<.> `service` -- имя пользователя в СУБД PostgreSQL.
 <.> Доменный пользователь, от имени которого будет запущен pgAgent.
 +
 . Запустите сервис PostgreSQL под учетной записью домена, в котором зарегистрированы пользователи из <<register,предыдущего>> шага.
