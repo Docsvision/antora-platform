@@ -39,31 +39,10 @@ NOTE: Если данный параметр отключен, то процед
 
 [#pgSqlWindowsAuthentication]
 === Настройка PostgreSQL для использования аутентификации Windows
-[#users]
-. Создайте в PostgreSQL пользователей и назначьте для пользователей соответствующие права:
-.. Для работы
-ifdef::platform[]
-xref:ROOT:requirements-server-account.adoc[сервера {dv}],
-endif::[]
-ifndef::installguide[]
-xref:5.5.5@platform:ROOT:requirements-server-account.adoc[сервера {dv}],
-endif::[]
-сервиса
-ifdef::platform[]
-xref:ROOT:requirements-full-text-account.adoc[полнотекстового поиска]
-endif::[]
-ifndef::installguide[]
-xref:5.5.5@platform:ROOT:requirements-full-text-account.adoc[полнотекстового поиска]
-endif::[]
-и
-ifdef::platform[]
-xref:ROOT:requirements-file-service-account.adoc[файлового сервиса].
-endif::[]
-ifndef::installguide[]
-xref:5.5.5@platform:ROOT:requirements-file-service-account.adoc[файлового сервиса].
-endif::[]
-+
-Может использоваться одна учетная запись.
+
+
+.[[users]] Создайте в PostgreSQL пользователей и назначьте для пользователей соответствующие права:
+.. Для работы xref:ROOT:requirements-server-account.adoc[сервера {dv}], сервиса xref:ROOT:requirements-full-text-account.adoc[полнотекстового поиска] и xref:ROOT:requirements-file-service-account.adoc[файлового сервиса] может использоваться одна учетная запись.
 +
 .. Пользователя, от имени которого будет работать pgAgent.
 +
@@ -89,8 +68,8 @@ mymap service@COMPANY service <.> <.>
 mymap petrov.b@COMPANY petrov.b
 mymap postgres@COMPANY postgres <.>
 ----
-<.> имя-пользователя-в-домене@название-домена.
-<.> service -- имя пользователя в СУБД PostgreSQL.
+<.> пользователь@ДОМЕН.
+<.> `service` -- имя пользователя в СУБД PostgreSQL.
 <.> Доменный пользователь, от имени которого будет запущен pgAgent.
 +
 . Запустите сервис PostgreSQL под учетной записью домена, в котором зарегистрированы пользователи из <<register,предыдущего>> шага.
