@@ -89,3 +89,4 @@
 * Приложения
 ** xref:security-groups.adoc[]
 ** xref:microsoft-postgre.adoc[]
+** xref:ms-pg-migration.adoc[]
