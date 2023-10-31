@@ -17,4 +17,4 @@
 ** xref:requirements-network.adoc[]
 ** xref:requirements-file-service-account.adoc[]
 ** xref:requirements-server-account.adoc[]
-** xref:license.adoc[]
+** xref:requirements-license.adoc[]

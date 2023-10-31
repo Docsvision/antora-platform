@@ -1,7 +1,7 @@
 * Администрирование модуля
 ** xref:pre-config-server.adoc[Предварительная настройка сервера]
 ** xref:pre-config-db.adoc[]
-** xref:install-server.adoc[]
+** xref:install-platform.adoc[]
 ** xref:install-client.adoc[]
 ** Подготовка к работе
 *** xref:config-master.adoc[]
