@@ -1,3 +1,0 @@
-// tag::restart[]
-. Перезапустите IIS и службу *{sss}*.
-// end::restart[]
