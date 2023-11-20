@@ -2,7 +2,7 @@
 
 Поддержка авторизации через ЕСИА::
 В качестве расширений авторизации поддерживается УЗ ЕСИА (госуслуги)
-include::ROOT:partial$chunks.adoc[tags=esia-v]
+include::ROOT:partial$excerpts.adoc[tags=esia-v]
 
 Добавление расширений авторизации::
 Появилась возможность xref:admin:authorization-extensions.adoc[добавить] сторонние расширения авторизации.

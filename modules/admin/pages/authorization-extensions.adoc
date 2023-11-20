@@ -5,7 +5,7 @@
 .Поддерживается вход при помощи следующих учётных записей:
 * Microsoft Azure
 * ЕСИА (Госуслуги) по почте, номеру телефона, номеру СНИЛС
-include::ROOT:partial$chunks.adoc[tags=esia-v]
+include::ROOT:partial$excerpts.adoc[tags=esia-v]
 
 Настроить расширения можно при помощи изменения записей реестра в ветке `{hklm-dv}\Platform\5.5\Server\Authentication`.
 

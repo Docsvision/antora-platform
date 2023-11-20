@@ -2,7 +2,7 @@
 
 Перечисленные права должны быть предоставлены учетной записи пула приложений IIS (пул по умолчанию -- "DefaultAppPool"), в котором работает веб-приложение сервера {dv}, а также учетной записи службы *{sss}*.
 
-include::partial$chunks.adoc[tags=system-accounts]
+include::partial$excerpts.adoc[tags=system-accounts]
 
 [NOTE]
 ====
