@@ -1,5 +1,5 @@
 .xref:index.adoc[{pl}]
-* xref:index.adoc[Аннотация]
+* xref:index.adoc[]
 
 * xref:restrictions.adoc[]
 
