@@ -61,25 +61,26 @@ CloneDbUtil.exe [@argfile] [/ms:] [/pg:] [/p:]
 [/test[+|-]] [/f[+|-]] [/in:] [/out:] [/infolder:]
 [/outfolder:] [/s[+|-]] [/m:] [/help|?|h]
 
-@argfile Read arguments from a file.
-/ms: MsSql database connection string (Default is "")
-/pg: PgSql database connection string (Default is "")
-/p: Export/Import folder path (Default is "")
-/install[+|-] Install export objects
-/clone[+|-] Clone database structure
-/export[+|-] Export tables to csv files
-/l: Limits number of tables to export per call (Default is "0")
-/import[+|-] Import tables from csv files
-/test[+|-] Tests connection to database(s)
-/f[+|-] Normalize file
-/in: Input file path (Default is "")
-/out: Output file path (Default is "")
-/infolder: Input folder with csv files (Default is "")
-/outfolder: Output folder for converted csv files (Default is "")
-/s[+|-] Split file
-/m: Maximum number of rows per file (for split) (Default is
+@argfile прочитать аргументы из файла.
+/ms: строка подключения к БД MsSql (По умолчанию: "")
+/pg: строка подключения к БД PgSql (По умолчанию: "")
+/p: Экпортировать/Импортировать путь папки (По умолчанию: "")
+/install[+|-] установить экспортированные объекты
+/clone[+|-] клонировать структуру БД
+/export[+|-] экспортировать таблица в файлы csv
+/l: Ограничить число таблиц для экспортирования в один выззов (По умолчанию: "0")
+/import[+|-] импортировать таблицы из файлов csv
+/test[+|-] проверить подключеник базам данных
+/f[+|-] нормализовать файл
+/in: путь к файлу-источнику (По умолчанию: "")
+/out: путь к файлу-приёмнику (По умолчанию: "")
+/infolder: папка-источник с файлами csv (По умолчанию: "")
+/outfolder: папка-приёмник с конвертированными файлами csv (По умолчанию: "")
+/s[+|-] разделить файл
+/m: максимальное число строк в файле (для разделения) (По умолчанию:
 "2000")
-/help Show usage.
+/license: проверка лицензии
+/help: справка по использованию
 ----
 ====
 
