@@ -280,11 +280,11 @@ CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated 
 +
 Рекомендуется понизить версию базы и библиотек карточек запросом. Например, если версия базы-источника была `4352`, перед обновлением следует выполнить команды:
 +
-[source,shell]
+[source,pgsql]
 ----
-update dvsys_globalinfo set "Version" =  4350
-update dvsys_libraries set "SysVersion" = 4350 where "SysVersion" = 4352
-update dvsys_carddefs set "SysVersion" = 4350 where "SysVersion" = 4352
+update dvsys_globalinfo set "Version" =  4350;
+update dvsys_libraries set "SysVersion" = 4350 where "SysVersion" = 4352;
+update dvsys_carddefs set "SysVersion" = 4350 where "SysVersion" = 4352;
 ----
 +
 // . Установите заново все серверные расширения {dv}.o
