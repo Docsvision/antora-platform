@@ -1,4 +1,4 @@
-:pg: Postgre
+:pg: Postgres
 
 = Утилита миграции с БД {ms} на {pg}
 
