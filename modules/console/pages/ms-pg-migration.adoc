@@ -1,4 +1,5 @@
 :pg: Postgres
+:something: IIS
 
 = Утилита миграции с БД {ms} на {pg}
 
@@ -287,6 +288,8 @@ update dvsys_globalinfo set "Version" =  4350;
 update dvsys_libraries set "SysVersion" = 4350 where "SysVersion" = 4352;
 update dvsys_carddefs set "SysVersion" = 4350 where "SysVersion" = 4352;
 ----
++
+При переходе к шагу загрузки библиотек карточек и настроек дополнительных модулей выполните перезапуск {something}.
 +
 // . Установите заново все серверные расширения {dv}.o
 // Например, серверное расширение {wc}а.
