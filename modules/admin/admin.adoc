@@ -3,12 +3,11 @@
 ** xref:pre-config-db.adoc[]
 ** xref:install-platform.adoc[]
 ** xref:install-client.adoc[]
-** Подготовка к работе
+** xref:preparation.adoc[]
 *** xref:config-master.adoc[]
 *** xref:post-config-server.adoc[]
 ** xref:authorization-extensions.adoc[]
-** Обновление модуля
-*** xref:update-module.adoc[]
+** xref:update-module.adoc[]
 *** Действия при обновлении с версии 5.5.1
 **** xref:update-scripts.adoc[]
 **** xref:update-user-components.adoc[]
