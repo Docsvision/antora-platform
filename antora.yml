@@ -27,6 +27,7 @@ asciidoc:
     net-v2: '3.5 SP1'
     iis: 'IIS версий 7.5, 8.0, 8.5 или 10'
     ms: 'Microsoft'
+    pl-req: '5.5.5, сборка 7876'
 
 nav:
 - modules/ROOT/nav.adoc
