@@ -1,4 +1,4 @@
-:page-aliases: ../microsoft-postgre.adoc
+:page-aliases: console:microsoft-postgre.adoc
 
 = Сравнение возможностей {dv} при использовании БД Microsoft SQL Server и PostgreSQL
 
