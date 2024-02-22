@@ -1,4 +1,4 @@
-:page-aliases: ../security-groups.adoc
+:page-aliases: console:security-groups.adoc
 
 = Группы безопасности {dv}
 

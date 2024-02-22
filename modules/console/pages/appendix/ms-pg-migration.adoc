@@ -1,6 +1,6 @@
 :pg: Postgres
 :something: IIS
-:page-aliases: ../ms-pg-migration.adoc[]
+:page-aliases: console:ms-pg-migration.adoc[]
 
 = Утилита миграции с БД {ms} на {pg}
 
