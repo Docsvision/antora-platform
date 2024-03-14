@@ -91,7 +91,7 @@
 |При создании запроса атрибутивного поиска с условием `Равно` из РМА карточки не находились.
 
 |ERR-4207 (SUP-7804)
-|При обновлении модуля {pl} до версии 5.5.5 в журнале Консоли настройки возникала ошибка `String or binary data would be truncated`, когда использовалась БД на {ms} SQL Server 2014.
+|При обновлении модуля {pl} до версии 5.5.5 в журнале Консоли настройки возникала ошибка `String or binary data would be truncated`, когда использовалась БД на {mssql} Server 2014.
 
 |ERR-4093 (SUP-7742)
 |Возникала ошибка `Cannot open database "" requested by the login. The login failed. Login failed for user 'sa'.` при открытии Консоли настроек {dv} с неработоспособной БД.
