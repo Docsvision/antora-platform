@@ -1,4 +1,3 @@
-:pg: Postgres
 :something: IIS
 :page-aliases: console:ms-pg-migration.adoc
 
