@@ -1,4 +1,4 @@
-= Подключить полнотекстовый поиск {mssql} Server
+= Подключить полнотекстовый поиск Microsoft SQL Server
 
 . Если требуется индексировать содержимое файлов PDF и Microsoft Office, выполните инструкцию, приведенную в пункте xref:search-pdf-office.adoc[].
 include::admin:partial$excerpts.adoc[tags=openFullText]
@@ -7,7 +7,7 @@ include::admin:partial$excerpts.adoc[tags=openFullText]
 .Окно добавления БД к сервису полнотекстового индексирования
 image::admin:add-db-to-fulltext.png[Окно добавления БД к сервису полнотекстового индексирования]
 +
-. В списке _Название базы_ выберите подключаемую БД {mssql} Server. Нажмите *Далее*, чтобы продолжить настройку.
+. В списке _Название базы_ выберите подключаемую БД Microsoft SQL Server. Нажмите *Далее*, чтобы продолжить настройку.
 +
 В списке баз данных отображаются БД, xref:db-settings.adoc[подключенные] к данному серверу {dv}.
 +

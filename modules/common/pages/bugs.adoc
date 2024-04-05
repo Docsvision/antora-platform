@@ -76,7 +76,7 @@ include::5.5.17@webclient:admin:partial$table.adoc[]
 |Добавленный файл к карточке оставался в папке `C:\Windows\Temp\` и не удалялся из неё.
 
 |ERR-1653 (SUP-6030)
-|При попытке добавить или создать базу на {pgsql} Возникала ошибка `System.TypeInitializationException: Инициализатор типа "DocsVision.Platform.Data.PgSqlDatabaseConnection" выдал исключение`.
+|При попытке добавить или создать базу на PostgreSQL Возникала ошибка `System.TypeInitializationException: Инициализатор типа "DocsVision.Platform.Data.PgSqlDatabaseConnection" выдал исключение`.
 
 |ERR-1492 (SUP-5915)
 |Возникала ошибка `ErrorPublishingView` при открытии представления, содержащего строковую константу и группу из ссылочного поля.
@@ -257,7 +257,7 @@ DocsVision.Platform.StorageServer.SoapError: 1637, Internal exception, error cod
 |Почтовые уведомления приходили без дополнительного файла, вне зависимости от флага `*Переносить дополнительные файлы*` в настройках вида карточек.
 
 |ERR-244 (SUP-5363)
-|Некорректно работал атрибутивный поиск в {wc}е при использовании БД {pgsql}: чтобы найти карточки по дате, требовалось ввести предыдущий день.
+|Некорректно работал атрибутивный поиск в {wc}е при использовании БД PostgreSQL: чтобы найти карточки по дате, требовалось ввести предыдущий день.
 
 |DV5-6830 (SUP-5361)
 |Исправлена ошибка, при которой пул {wc}а прекращал работу с ошибкой `Index was outside the bounds of the array`.
