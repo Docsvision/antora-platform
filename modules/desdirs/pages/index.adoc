@@ -5,41 +5,41 @@
 
 Документация в данном разделе содержит описание Конструкторов и справочников {dv}.
 
-Документ предназначен для администраторов и инженеров системы {dv}.
+Раздел документации предназначен для администраторов и инженеров системы {dv}.
 
 [#arrangement]
 == Как организована документация модуля
 
 Документация содержит описание справочников, поставляемых с модулем {pl}:
 
-* "xref:6.1@platform:desdirs:foldertypes/directory.adoc[Справочник типов папок]".
-* "xref:6.1@platform:desdirs:systemsettings/directory.adoc[Системные настройки]".
-* "xref:6.1@platform:desdirs:components/directory.adoc[Справочник компонентов]".
+* "xref:dev@platform:desdirs:foldertypes/directory.adoc[Справочник типов папок]".
+* "xref:dev@platform:desdirs:systemsettings/directory.adoc[Системные настройки]".
+* "xref:dev@platform:desdirs:components/directory.adoc[Справочник компонентов]".
 
 Конструкторы и справочники, поставляемые с модулем _{bo}_ описаны в следующих разделах документации модуля _{bo}_:
 
-* "xref:6.1@backoffice:desdirs:card-kinds/directory.adoc[]".
-* "xref:6.1@backoffice:desdirs:categories/directory.adoc[]".
-* "xref:6.1@backoffice:desdirs:links/directory.adoc[]".
-* "xref:6.1@backoffice:desdirs:partners/directory.adoc[]".
-* "xref:6.1@backoffice:desdirs:servers/directory.adoc[]".
-* "xref:6.1@backoffice:desdirs:signatures/directory.adoc[]".
-* "xref:6.1@backoffice:desdirs:staff/directory.adoc[]".
-* "xref:6.1@backoffice:desdirs:directories/designer.adoc[]".
-* "xref:6.1@backoffice:desdirs:layouts/designer.adoc[]".
-* "xref:6.1@backoffice:desdirs:numeration/designer.adoc[]".
-* "xref:6.1@backoffice:desdirs:roles/designer.adoc[]".
-* "xref:6.1@backoffice:desdirs:scripts/designer.adoc[]".
-* "xref:6.1@backoffice:desdirs:states/designer.adoc[]".
+* "xref:dev@backoffice:desdirs:card-kinds/directory.adoc[]".
+* "xref:dev@backoffice:desdirs:categories/directory.adoc[]".
+* "xref:dev@backoffice:desdirs:links/directory.adoc[]".
+* "xref:dev@backoffice:desdirs:partners/directory.adoc[]".
+* "xref:dev@backoffice:desdirs:servers/directory.adoc[]".
+* "xref:dev@backoffice:desdirs:signatures/directory.adoc[]".
+* "xref:dev@backoffice:desdirs:staff/directory.adoc[]".
+* "xref:dev@backoffice:desdirs:directories/designer.adoc[]".
+* "xref:dev@backoffice:desdirs:layouts/designer.adoc[]".
+* "xref:dev@backoffice:desdirs:numeration/designer.adoc[]".
+* "xref:dev@backoffice:desdirs:roles/designer.adoc[]".
+* "xref:dev@backoffice:desdirs:scripts/designer.adoc[]".
+* "xref:dev@backoffice:desdirs:states/designer.adoc[]".
 
 Описание справочника включает обзор пользовательского интерфейса и руководство по работе со справочником.
 
 [WARNING]
 ====
-Описание конструкторов и справочников модуля {wc} см. в документации модуля {wc}:
+Описание конструкторов и справочников модулей {wc} и {am} см. в документации этих модулей:
 
-* "xref:6.1@webclient:user:directories/partners/directory.adoc[]"
-* "xref:6.1@webclient:user:directories/nomenclature/directory.adoc[]"
-* "xref:6.1@webclient:user:directories/staff/directory.adoc[]"
-// * "xref:6.1@webclient:user:directories/powers/directory.adoc[]"
+* "xref:dev@webclient:user:directories/partners/directory.adoc[]"
+* "xref:dev@webclient:user:directories/staff/directory.adoc[]"
+* "xref:dev@webclient:user:directories/powers/directory.adoc[]"
+* "xref:dev@archivemgmt:user:directory.adoc[]"
 ====
