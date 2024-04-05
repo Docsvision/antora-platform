@@ -5,7 +5,7 @@
 
 [source,bash]
 ----
-cp /usr/share/postgresql/11/extension/pgagent* /opt/pgpro/std-15/share/extension/
+cp /usr/share/{pgsql}/11/extension/pgagent* /opt/pgpro/std-15/share/extension/
 ----
 ====
 // end::pgagent[]
@@ -116,9 +116,9 @@ include::partial$excerpts.adoc[tags=connectionLine]
 // end::satellite[]
 
 // tag::storageLimits[]
-* Для СУБД Microsoft SQL Server существует ограничение на размер добавляемых файлов -- не более 2 Гб. Если в {dv} необходимо хранить файлы больше 2 Гб, используйте *_Хранилище на диске_*, *_Filestream хранилище в базе данных {dv}_*, *_FileStream хранилище во внешней базе данных Microsoft SQL Server_* или другое хранилище, поддерживающее файлы такого размера.
+* Для СУБД {mssql} Server существует ограничение на размер добавляемых файлов -- не более 2 Гб. Если в {dv} необходимо хранить файлы больше 2 Гб, используйте *_Хранилище на диске_*, *_Filestream хранилище в базе данных {dv}_*, *_FileStream хранилище во внешней базе данных {mssql} Server_* или другое хранилище, поддерживающее файлы такого размера.
 +
-Для СУБД PostgreSQL аналогичное ограничение составляет 1 Гб.
+Для СУБД {pgsql} аналогичное ограничение составляет 1 Гб.
 // end::storageLimits[]
 
 // tag::connectionLine[]

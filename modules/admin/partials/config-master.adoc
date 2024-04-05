@@ -72,9 +72,9 @@ image::5.5.5@platform:admin:config-sql-server.png[Создание новой Б
 +
 [NOTE]
 ====
-Для БД PostgreSQL адрес сервера следует указывать без домена (например, `postgre` вместо `postgre.company.com`), или указывать IP адрес.
+Для БД {pgsql} адрес сервера следует указывать без домена (например, `postgre` вместо `postgre.company.com`), или указывать IP адрес.
 
-Порт указывается только для PostgreSQL (по умолчанию -- `5432`).
+Порт указывается только для {pgsql} (по умолчанию -- `5432`).
 ====
 +
 [NOTE]
@@ -88,8 +88,8 @@ image::5.5.5@platform:admin:config-sql-server.png[Создание новой Б
 image::5.5.5@platform:admin:config-sql-create.png[Создание новой БД через мастер настройки {dv}]
 +
 * Не используйте кириллицу, пробелы и спецсимволы в имени БД.
-* Для БД Microsoft SQL Server в поле _Язык_ выберите локаль БД, установленную в параметре `Server Collation ()` экземпляра Microsoft SQL Server. Рекомендуемое значение: Русский (Cyrillic_General_CI_AS).
-* При выборе СУБД Microsoft SQL Server также можно настроить сателлитные БД. Больше информации о сателлитных БД xref:5.5.5@platform:console:db-satellite.adoc[по ссылке].
+* Для БД {mssql} Server в поле _Язык_ выберите локаль БД, установленную в параметре `Server Collation ()` экземпляра {mssql} Server. Рекомендуемое значение: Русский (Cyrillic_General_CI_AS).
+* При выборе СУБД {mssql} Server также можно настроить сателлитные БД. Больше информации о сателлитных БД xref:5.5.5@platform:console:db-satellite.adoc[по ссылке].
 +
 WARNING: После создания БД изменять конфигурацию сателлитных БД не рекомендуется. Это может привести к потере данных.
 +
