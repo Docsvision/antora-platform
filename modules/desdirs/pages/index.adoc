@@ -36,7 +36,6 @@
 
 .Описание конструкторов и справочников модуля {wc} см. в документации модуля {wc}:
 * "xref:5.5.17@webclient:user:directories/partners/directory.adoc[]"
-* "xref:5.5.17@archivemgmt:user:directory.adoc[]"
 * "xref:5.5.17@webclient:user:directories/staff/directory.adoc[]"
 * "xref:5.5.17@webclient:user:directories/powers/directory.adoc[]"
 
