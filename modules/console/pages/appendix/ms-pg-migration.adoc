@@ -11,6 +11,7 @@
 .Требования перед началом миграции:
 ****
 * Ознакомьтесь с разделом "xref:microsoft-postgre.adoc[]".
+* Если для подключения к базе-источнику или базе-приёмнику используется аутентификация Windows, учетная запись, под которой запускается утилита миграции, должна обладать полными правами на данную БД. Минимальные требования указаны в разделе "xref:ROOT:requirements-file-service-account.adoc[]".
 * Убедитесь, что на сервере {pgsql} БД достаточно свободного места.
 * Выполните <<prepare,рекомендации по подготовке>> исходной базы.
 * Обновите модуль {pl} до версии {pl-req} и выше, поддерживающей миграцию и обновите рабочую БД.
@@ -173,7 +174,7 @@ CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated 
 +
 [source,shell]
 ----
-CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /p:"D:\clone_db_data" /export /l:10
+CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /p:"C\clone_db_data" /export /l:10
 ----
 +
 Ключ `/l:10` может использоваться для ограничения количества таблиц, выгружаемых за раз. Если ключ не указан, выгружаются все таблицы. Рекомендуется использовать этот ключ для порционного выполнения, контролируя доступное дисковое пространство.
