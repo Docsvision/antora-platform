@@ -55,4 +55,4 @@ image::app-pool-settings.png[Настройки пула приложений]
 
 Если серверная часть модуля была установлена на компьютер, являющийся контроллером домена, нужно вручную добавить в локальную группу безопасности _{dv} Users_ пользователей, которые будут работать с системой {dv}.
 
-include::upgrade:551-552:partial$excerpts.adoc[tags=console]
+include::dv5@upgrade:551-552:partial$excerpts.adoc[tags=console]
