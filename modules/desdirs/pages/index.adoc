@@ -1,4 +1,4 @@
-= Общие сведения
+= Конструкторы и справочники
 
 [#purpose]
 == Назначение документации
@@ -10,7 +10,7 @@
 [#arrangement]
 == Как организована документация модуля
 
-Документация содержит описание справочников, поставляемых с модулем {pl}:
+Документация содержит описание справочников, поставляемых с модулем {pl}. Описание справочника включает обзор пользовательского интерфейса и руководство по работе со справочником:
 
 * "xref:dev@platform:desdirs:foldertypes/directory.adoc[Справочник типов папок]".
 * "xref:dev@platform:desdirs:systemsettings/directory.adoc[Системные настройки]".
@@ -32,8 +32,6 @@
 * "xref:dev@backoffice:desdirs:scripts/designer.adoc[]".
 * "xref:dev@backoffice:desdirs:states/designer.adoc[]".
 
-Описание справочника включает обзор пользовательского интерфейса и руководство по работе со справочником.
-
 .Описание конструкторов и справочников модуля {wc} см. в документации модуля {wc}:
 * "xref:dev@webclient:user:directories/partners/directory.adoc[]"
 * "xref:dev@webclient:user:directories/staff/directory.adoc[]"
@@ -41,4 +39,3 @@
 
 .Описание справочника номенклатуры дел см. в документации модуля {am}:
 * "xref:dev@archivemgmt:user:directory.adoc[]"
-

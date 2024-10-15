@@ -1,17 +1,17 @@
-:something: IIS
+:pg: Postgres
+:something: {sss-new}
 :page-aliases: console:ms-pg-migration.adoc
 
 = Утилита миграции с БД {ms} на {pg}
 
 Процесс миграции с БД типа {mssql} на {pgsql} состоит из нескольких этапов. Это позволяет лучше контролировать каждый шаг миграции, а также позволяет продолжить миграцию с места остановки, например, при возникновении ошибки. Т.к. {pgsql} не поддерживает Сателлитные БД, миграция в {pgsql} подразумевает перенос архивных данных и журналов из соответствующих БД {mssql} (*_Archive* и *_Log*) в основную.
 
-Для использования утилиты миграции необходима опция лицензии _Docsvision Утилита миграции на {pgsql}_.
+Для использования утилиты миграции необходима опция лицензии _Docsvision Утилита миграции на PostgreSQL_.
 
 [#requirements]
 .Требования перед началом миграции:
 ****
-* Ознакомьтесь с разделом "xref:microsoft-postgre.adoc[]".
-* Если для подключения к базе-источнику или базе-приёмнику используется аутентификация Windows, учетная запись, под которой запускается утилита миграции, должна обладать полными правами на данную БД. Минимальные требования указаны в разделе "xref:ROOT:requirements-file-service-account.adoc[]".
+* Ознакомьтесь с разделом "xref:appendix/microsoft-postgre.adoc[]".
 * Убедитесь, что на сервере {pgsql} БД достаточно свободного места.
 * Выполните <<prepare,рекомендации по подготовке>> исходной базы.
 * Обновите модуль {pl} до версии {pl-req} и выше, поддерживающей миграцию и обновите рабочую БД.
@@ -22,7 +22,7 @@
 * Если миграция архивов и/или журналов из сателлитных БД не требуется, можно предварительно удалить настройки `UseOuterArchive` и/или `UseOuterLog` из таблицы *dvsys_settings*.
 ****
 
-.Краткая справка по миграции:
+.Краткая справка по миграцию:
 . Подготовьте исходную БД {mssql}.
 . Вытесните файлы в файловое хранилище.
 . Экспортируйте исходную БД в `.csv` файлы.
@@ -38,15 +38,15 @@
 Утилита может использоваться в режиме тестирования соединения, например, для проверки возможности установления соединения с базой-источником {mssql} и базой-приёмником {pgsql}. Примеры использования приведены ниже:
 
 .Проверка подключения к БД {pgsql}
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /test
+docsvision-сlonedb /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /test
 ----
 
 .Проверка подключения к БД {mssql}
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /ms:"Initial Catalog=source_db; Data Source=server; Integrated Security = SSPI;" /test
+docsvision-сlonedb /ms:"Initial Catalog=source_db; Data Source=server; Integrated Security = SSPI;" /test
 ----
 
 Работа утилиты сопровождается сообщениями в окне консоли, также утилита ведет текстовый файл журнала, который сохраняется рядом с файлом утилиты. Для каждого запуска создается отдельный файл журнала, с указанием идентификатора процесса и времени запуска.
@@ -56,9 +56,9 @@ WARNING: Утилита должна запускаться исключител
 .Аргументы командной строки утилиты
 [%collapsible]
 ====
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe [@argfile] [/ms:] [/pg:] [/p:]
+docsvision-сlonedb [@argfile] [/ms:] [/pg:] [/p:]
 [/install[+|-]] [/clone[+|-]] [/export|e[+|-]] [/l:] [/import[+|-]]
 [/test[+|-]] [/f[+|-]] [/in:] [/out:] [/infolder:]
 [/outfolder:] [/s[+|-]] [/m:] [/help|?|h]
@@ -66,13 +66,13 @@ CloneDbUtil.exe [@argfile] [/ms:] [/pg:] [/p:]
 @argfile прочитать аргументы из файла.
 /ms: строка подключения к БД MsSql (По умолчанию: "")
 /pg: строка подключения к БД PgSql (По умолчанию: "")
-/p: Экспортировать/Импортировать путь папки (По умолчанию: "")
+/p: Экпортировать/Импортировать путь папки (По умолчанию: "")
 /install[+|-] установить экспортированные объекты
 /clone[+|-] клонировать структуру БД
-/export[+|-] экспортировать таблицу в файлы csv
-/l: Ограничить число таблиц для экспортирования в один вызов (По умолчанию: "0")
+/export[+|-] экспортировать таблица в файлы csv
+/l: Ограничить число таблиц для экспортирования в один выззов (По умолчанию: "0")
 /import[+|-] импортировать таблицы из файлов csv
-/test[+|-] проверить подключение к базам данных
+/test[+|-] проверить подключеник базам данных
 /f[+|-] нормализовать файл
 /in: путь к файлу-источнику (По умолчанию: "")
 /out: путь к файлу-приёмнику (По умолчанию: "")
@@ -85,6 +85,27 @@ CloneDbUtil.exe [@argfile] [/ms:] [/pg:] [/p:]
 /help: справка по использованию
 ----
 ====
+
+[#install]
+== Установка утилиты
+
+. Установите пакеты утилиты на сервер {dv} следующей командой, предварительно обновив индекс пакетов:
++
+[tabs]
+====
+Astra Linux::
++
+[source]
+----
+sudo apt-get update
+sudo apt-get install docsvision-сlonedb
+----
+
+РЕД ОС::
++
+ $ sudo dnf install docsvision-сlonedb
+====
+
 
 [#prepare]
 == Подготовка исходной БД
@@ -164,17 +185,17 @@ update f set [StorageState] = 0 from dvsys_files f where [StorageState] = 1;
 . Перед продолжением убедитесь, что <<requirements,выполнены все указанные выше требования>>.
 . Сгенерируйте в рабочей БД вспомогательные объекты (таблицы и представления). Пример команды приведён ниже:
 +
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /install
+docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /install
 ----
 +
 . Создайте папку для экспорта таблицы в `.csv` файлы на сервере {mssql}. +
 Экспорт выполняется на сервере СУБД утилитой `bcp.exe`, входящей в состав {mssql} Server. Использование команды из примера ниже вызовет `bcp.exe`:
 +
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /p:"C\clone_db_data" /export /l:10
+docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /p:"D:\clone_db_data" /export /l:10
 ----
 +
 Ключ `/l:10` может использоваться для ограничения количества таблиц, выгружаемых за раз. Если ключ не указан, выгружаются все таблицы. Рекомендуется использовать этот ключ для порционного выполнения, контролируя доступное дисковое пространство.
@@ -208,7 +229,7 @@ GO
 
 [source,sql]
 ----
-  -- To allow advanced options to be changed.
+-- To allow advanced options to be changed.
 EXECUTE sp_configure 'show advanced options', 1;
 GO
 -- To update the currently configured value for advanced options.
@@ -236,37 +257,37 @@ GO
 +
 Чтобы изменить кодировку файлов, созданных при экспорте, необходимо перенести их на сервер, где создана БД {pg}, а затем на этом сервере запустить утилиту и выполнить перекодировку:
 +
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /f /infolder:"C:\clone_db_data" /outfolder:"C:\clone_db_data2"
+docsvision-сlonedb /f /infolder:"./clone_db_data" /outfolder:"./clone_db_data2"
 ----
 +
-Команда выше перекодирует и нормализует каждый `.csv` файл в директории `C:\clone_db_data`. Папка, в которой будут храниться перекодированные файлы, должна быть создана. Обработанные файлы сохраняются в директории `C:\clone_db_data2`. Для работы этого этапа необходимо предусмотреть дисковое пространство.
+Команда выше перекодирует и нормализует каждый `.csv` файл в директории `./clone_db_data`. Папка, в которой будут храниться перекодированные файлы, должна быть создана. Обработанные файлы сохраняются в директории `./clone_db_data2`. Для работы этого этапа необходимо предусмотреть дисковое пространство.
 +
 Перекодировку можно выполнить и для отдельного файла, например так:
 +
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /f /in:"C:\clone_db_data\dvsys_instances.cvs" /out:"C:\clone_db_data2\dvsys_instances.cvs"
+docsvision-сlonedb /f /in:"./clone_db_data/dvsys_instances.cvs" /out:"./clone_db_data2/dvsys_instances.cvs"
 ----
 +
 ****
-Для импорта `.csv` файлов в базу {pg} их необходимо разместить на диск той машины, где развернут {pgsql}. При этом {pgsql} должен иметь доступ (соответствующие права у соответствующего пользователя) к этой папке. Поэтому можно задать, например, такой путь: `C:\ProgramFiles\PostgreSQL\12\share\Migration`. До выполнения команды необходимо обеспечить наличие всех подпапок в пути. В противном случае возникнет ошибка вида `Не удалось обнаружить часть пути`).
+Для импорта `.csv` файлов в базу {pg} их необходимо разместить на диск той машины, где развернут {pgsql}. При этом {pgsql} должен иметь доступ (соответствующие права у соответствующего пользователя) к этой папке. Поэтому можно задать, например, такой путь: `C:\Program Files\PostgreSQL\12\share\Migration`. До выполнения команды необходимо обеспечить наличие всех подпапок в пути. В противном случае возникнет ошибка вида `Не удалось обнаружить часть пути`).
 ****
 +
 . Создайте структуры БД {pgsql} для импорта таблиц. +
 Утилита использует метаданные из базы-источника для генерации скриптов библиотек карточек и сгенерирует таблицы необходимой структуры в базе {pgsql}.
 +
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /clone
+docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /clone
 ----
 +
 . Выполните импорт `.csv` файлов:
 +
-[source,shell]
+[source,bash]
 ----
-CloneDbUtil.exe /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /import /p:"C:\clone_db_data2" /l:25
+docsvision-сlonedb /ms:"Initial Catalog= source_db; Data Source=server; Integrated Security = SSPI;" /pg:"Server=127.0.0.1; Port=5432; Database=target_db; User ID=postgres; Password=password;" /import /p:"./clone_db_data2" /l:25
 ----
 +
 Список таблиц для обработки хранится в базе-источнике в таблице `dvexport_commands`. В ней же записаны команды для импорта и экспорта. При необходимости текст команд может быть исправлен SQL-запросом, и уже исправленные команды будут выполняться утилитой в режимах `/export` или `/import`. Кроме того, в столбце `Status` для каждой таблицы предусмотрен статус обработки. Всего их пять:
@@ -295,7 +316,7 @@ update dvsys_carddefs set "SysVersion" = 4350 where "SysVersion" = 4352;
 // . Установите заново все серверные расширения {dv}.o
 // Например, серверное расширение {wc}а.
 . Назначьте {pgsql} базу основной и отключите базу {mssql} в Консоли настройки {dv}.
-. Заново выполните настройки модуля {wf}, настройки почты см. "xref:dev@workflow:admin:mail-settings.adoc[]". Также выполните настройки почты и подключения к БД в {of-mc}, см. "xref:dev@mgmtconsole:user:connections-mail-server.adoc[]".
+. Заново выполните настройки модуля {wf}, настройки почты см. "xref:6.1@workflow:admin:mail-settings.adoc[]". Также выполните настройки почты и подключения к БД в {of-mc}, см. "xref:6.1@mgmtconsole:user:connections-mail-server.adoc[]".
 . Запустите все остановленные сервисы.
 . При повторном экспорте, например в другую папку потребуется сменить статус БД:
 +
