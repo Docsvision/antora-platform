@@ -9,7 +9,6 @@ asciidoc:
     os-3: '10 (Pro, Enterprise)'
     os-4: '11 (Pro, Enterprise)'
     es-v: '7.14.0'
-    es-d: '7-14-0'
     latest-platform: '5.5.5'
     latest-baseobjects: '5.5.5'
     latest-workflow: '5.5.3'
