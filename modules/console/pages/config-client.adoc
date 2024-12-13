@@ -1,1 +1,1 @@
-include::mgmtconsole:servers:partial$config-client.adoc[]
+include::dev@mgmtconsole:servers:partial$config-client.adoc[]
