@@ -247,7 +247,7 @@ CloneDbUtil.exe /f /infolder:"C:\clone_db_data" /outfolder:"C:\clone_db_data2"
 +
 [source,shell]
 ----
-CloneDbUtil.exe /f /in:"C:\clone_db_data\dvsys_instances.cvs" /out:"C:\clone_db_data2\dvsys_instances.cvs"
+CloneDbUtil.exe /f /in:"C:\clone_db_data\dvsys_instances.csv" /out:"C:\clone_db_data2\dvsys_instances.csv"
 ----
 +
 ****
