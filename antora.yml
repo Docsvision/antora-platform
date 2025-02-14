@@ -1,5 +1,6 @@
 name: platform
-version: "5.5.5"
+version: "GBL-3050"
+prerelease: true
 title: Платформа
 asciidoc:
   attributes:
