@@ -1,6 +1,7 @@
 name: platform
 version: "ERR-8580"
 title: Платформа
+prerelease: true
 asciidoc:
   attributes:
     dvcm: 'Docsvision CardManager'
