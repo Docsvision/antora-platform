@@ -1,5 +1,5 @@
 name: platform
-version: "ERR-8580"
+version: "5.5.5"
 title: Платформа
 asciidoc:
   attributes:
