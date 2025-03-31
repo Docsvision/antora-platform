@@ -1,6 +1,7 @@
 name: platform
 version: "5.5.5"
 title: Платформа
+prerelease: true
 asciidoc:
   attributes:
     dvcm: 'Docsvision CardManager'
