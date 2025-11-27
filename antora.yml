@@ -9,7 +9,7 @@ asciidoc:
     os-2: '8/8.1 (Pro, Enterprise)footnote:[Работа в ОС Windows 8 поддерживается только в режиме "Рабочего стола". Работа в режиме Metro, в том числе в Metro-Internet Explorer, не поддерживается.]'
     os-3: '10 (Pro, Enterprise)'
     os-4: '11 (Pro, Enterprise)'
-    es-v: '7.14.0'
+    es-v: '7.17.5'
     latest-platform: '5.5.5'
     latest-baseobjects: '5.5.5'
     latest-workflow: '5.5.3'
