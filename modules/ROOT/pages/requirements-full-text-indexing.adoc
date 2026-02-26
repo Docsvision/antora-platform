@@ -4,7 +4,7 @@
 
 include::partial$excerpts.adoc[tags=system-accounts]
 
-include::partial$summingRequirements.adoc[]
+include::5.5.5@platform:ROOT:partial$summingRequirements.adoc[]
 
 [cols="50%,50%",options="header"]
 |===

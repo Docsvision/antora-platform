@@ -1,13 +1,11 @@
 = Необходимое техническое обеспечение
 
-include::webclient:ROOT:page$requirements-hardware.adoc[tags=sum]
+include::5.5.5@platform:ROOT:partial$summingRequirements.adoc[]
 
 [#server]
 == Требования серверной части модуля
 
 Аппаратные требования серверной части модуля {pl} зависят от планируемого числа одновременно работающих с системой {dv} пользователей.
-
-include::partial$summingRequirements.adoc[]
 
 .Минимальные требования в зависимости от предполагаемого числа одновременно работающих пользователей:
 [cols="25%,75%",options="header"]
