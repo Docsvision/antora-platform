@@ -7,7 +7,7 @@ include::dev@webclient:ROOT:page$requirements-hardware.adoc[tags=sum]
 
 Аппаратные требования серверной части модуля {pl} зависят от планируемого числа одновременно работающих с системой {dv} пользователей.
 
-include::partial$summingRequirements.adoc[]
+include::6.1@platform:ROOT:partial$summingRequirements.adoc[]
 
 .Минимальные требования в зависимости от предполагаемого числа одновременно работающих пользователей:
 [cols="25%,75%",options="header"]

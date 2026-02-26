@@ -42,9 +42,6 @@ sudo ./activation online ВАШ-КЛЮЧ
 ====
 +
 . Выполните конфигурацию модуля по инструкции в разделе "xref:config-platform.adoc[]".
-. Запустите службу модуля командой:
-+
- $ sudo systemctl start dvappserver
 
 [#pl-ext]
 == Установка расширения сервера приложений для {of-mc}
@@ -68,6 +65,7 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
 +
 [source,json]
 ----
+{
   "DocsVision": {
     "Platform": {
       "Server": {
@@ -77,6 +75,7 @@ include::6.1@platform:admin:partial$install.adoc[tags=commands]
       }
     }
   }
+}
 ----
 <.> Строка подключения к БД, подробнее см. в разделе "xref:config-platform.adoc#connection-string[Конфигурация модуля {pl}]".
 +

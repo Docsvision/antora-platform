@@ -8,7 +8,7 @@ include::dev@install-linux:ROOT:requirements-software.adoc[tags=oslist]
 include::dev@install-linux:ROOT:requirements-software.adoc[tags=winlist]
 
 .Обязательное программное обеспечение:
-* https://www.cryptopro.ru/products/csp[КриптоПро CSP {csp-v}] для работы xref:dev@engineer:ROOT:authorization-extensions.adoc#esia[расширения аутентификации ЕСИА].
+* https://www.cryptopro.ru/products/csp[КриптоПро CSP {csp-v}] для работы простой подписи. Также используется для работы xref:engineer:ROOT:authorization-extensions.adoc#esia[расширения аутентификации ЕСИА].
 
 [#windows]
 == Требования к машине Windows
@@ -20,7 +20,7 @@ include::install-linux::partial$limitation.adoc[]
 // .NET Framework
 {net-r} --
 // при установке на Linux
-можно загрузить с https://dotnet.microsoft.com/en-us/download/dotnet/6.0[сайта Microsoft].
+можно загрузить с https://dotnet.microsoft.com/en-us/download/dotnet/[сайта Microsoft].
 * Microsoft {asp-bundle} и выше.
 
 [#client]
