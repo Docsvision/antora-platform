@@ -20,4 +20,4 @@ image::admin:settings-license.png[Раздел "Лицензия" Консоли
 // Запускает xref:manage-licenses.adoc#licenseActivation[мастер активации лицензии {dv}].
 
 В данной версии системы активация выполняет при помощи специальной утилиты.
-include::dev@system::partial$excerpts.adoc[tags=activation]
+include::dv6@system::partial$excerpts.adoc[tags=activation]
