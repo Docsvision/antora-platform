@@ -1,4 +1,12 @@
+:with-console: yes
+:with-config: no
+:do-what: варианты создания новой системной БД
+:link: "xref:6.2@mgmtconsole:servers:db-create.adoc[]"
+:cns-section: menu:Базы данных[Мастер баз данных]
+
 = Создать новую базу данных
+
+include::admin:partial$mancons.adoc[]
 
 . Откройте xref:db-master.adoc[мастер БД {dv}].
 +
@@ -23,15 +31,13 @@ image::admin:db-create-start.png[Настройка подключения к С
 Имя сервера::
 Сетевое имя сервера или экземпляра СУБД, например `sql.company.com`.
 +
-Для БД {pgsql} имя сервера следует указывать без домена, например `postgre`, а не `postgre.company.com`. Не следует использовать IP и имя LOCALHOST.
-+
 Порт::
 *Только для {pgsql}*. Порт подключения к СУБД, в {pgsql} по умолчанию используется порт `5432`.
 +
 Проверка подлинности::
 Тип проверки подлинности при подключении к СУБД:
-* *_SQL Server_* -- аутентификация с помощью учетной записи, зарегистрированной в СУБД.
-* *_Windows_* -- аутентификация с помощью текущей учетной записи Windows.
+* *_SQL Server_* -- аутентификация с помощью учётной записи, зарегистрированной в СУБД.
+* *_Windows_* -- аутентификация с помощью текущей учётной записи Windows.
 +
 [NOTE]
 ====
@@ -39,7 +45,7 @@ image::admin:db-create-start.png[Настройка подключения к С
 ====
 +
 Логин, Пароль::
-Данные учетной записи для подключения к СУБД.
+Данные учётной записи для подключения к СУБД.
 ****
 //end::dbSettings[]
 --
@@ -110,12 +116,7 @@ image::admin:db-create-check.png[Подтверждение параметров
 include::admin:partial$excerpts.adoc[tags=atomic]
 ****
 +
-. Дождитесь завершения инициализации БД и загрузки SQL объектов, затем перезапустите службу *{sss-new}* командой:
-+
-[source,bash]
-----
-sudo systemctl restart dvappserver
-----
+. Дождитесь завершения инициализации БД и загрузки SQL объектов, затем перезапустите службу Сервера {dv}.
 +
 . Выберите модули {dv}, данные которых должны быть загружены в БД. Нажмите *Завершить*.
 +
@@ -134,4 +135,4 @@ image::admin:db-create-modules.png[Выбор модулей, настройки
 +
 . Предоставьте сервисам {dv} xref:admin:post-config-server.adoc#accounts[необходимые] права.
 
-include::dv6@install-linux::config-master.adoc[tags=db-create-errors]
+include::6.2@mgmtconsole:servers:db-create.adoc[tags=db-create-errors]

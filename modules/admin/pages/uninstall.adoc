@@ -1,3 +1,5 @@
+:os1: Astra Linux
+
 = Удаление модуля
 
 Компоненты модуля удаляются стандартными средствами ОС.
@@ -9,18 +11,38 @@ WARNING: Компоненты модуля {pl} следует удалять т
 // . _{pl}_. Сервер.
 // . _{pl}_. Клиент.
 
+[#windows]
+== Удаление на Windows
+
+* Чтобы удалить модуль в ОС Windows, воспользуйтесь стандартными средствами системы (Установка и удаление программ).
+
 [#linux]
 == Удаление на Linux
 
-. Чтобы удалить модуль, выполните команду:
+* Чтобы удалить модуль {pl} в ОС Linux, выполните команду:
 +
-[tabs]
-====
-{os1}::
+--
+:wt: platform
+include::6.1@platform:admin:partial$delete.adoc[]
+--
 +
- $ sudo apt-get purge docsvision-platform
-
-{os2}::
+** Чтобы удалить раширение модуля {pl} для {of-mc} в ОС Linux, выполните:
 +
- $ sudo dnf remove docsvision-platform
-====
+--
+:wt: ext-platform-mc
+include::6.1@platform:admin:partial$delete.adoc[]
+--
++
+* Чтобы удалить модуль {fs} в ОС Linux, выполните команду:
++
+--
+:wt: fileservice
+include::6.1@platform:admin:partial$delete.adoc[]
+--
++
+** Чтобы удалить раширение модуля {fs} для {of-mc} в ОС Linux, выполните:
++
+--
+:wt: ext-fileservice-mc
+include::6.1@platform:admin:partial$delete.adoc[]
+--

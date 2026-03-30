@@ -1,4 +1,12 @@
+:with-console: yes
+:with-config: no
+:do-what: способы настройки хранилищ файлов
+:link: "xref:6.2@mgmtconsole:servers:db-storage-samples.adoc[]"
+:cns-section: "menu:Базы данных[Настройка > Внешние хранилища]"
+
 = Примеры настройки хранилищ файлов
+
+include::admin:partial$mancons.adoc[]
 
 [WARNING]
 ====

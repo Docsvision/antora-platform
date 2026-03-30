@@ -10,7 +10,7 @@
 
 include::installguide::partial$dbRights.adoc[]
 
-Подробнее про использование аутентификации см. в разделе xref:console:db-authentication.adoc[].
+Подробнее про использование аутентификации см. в разделе "xref:console:db-authentication.adoc[]".
 
 include::installguide::page$config-master.adoc[tags=master]
 +
@@ -20,7 +20,7 @@ image::config-master-web-server.png[Настройка веб-приложени
 [#database]
 include::installguide::page$config-master.adoc[tags=dbase]
 +
-* Если вы обновляете {dv}, следуйте инструкции в пункте xref:dev@platform:admin:update-module.adoc[].
+* Если вы обновляете {dv}, следуйте инструкции в пункте xref:6.1@platform:admin:update-module.adoc[].
 +
 . Выберите режим работы {wincl}а по умолчанию.
 +
@@ -52,10 +52,10 @@ image::standard-config-bo.png[Загрузка стандартной конфи
 .Загрузка стандартной конфигурации базовых модулей {dv}
 image::standard-config-wf.png[Загрузка стандартной конфигурации базовых модулей {dv}]
 +
-Введите данные учетной записи, от имени которой будет запускаться сервис *{wfs-new}*, в поля `Учетная запись` и `Пароль`. Другие данные изменять не требуется.
+Введите данные учётной записи, от имени которой будет запускаться сервис Workflow, в поля `Учётная запись` и `Пароль`. Другие данные изменять не требуется.
 +
-Требования к учетной записи сервиса *{wfs-new}* приведены в документации по администрированию модуля _{wf}_, в разделе xref:dev@workflow:admin:install.adoc#account[Создание учетной записи для сервиса Workflow].
+Требования к учётной записи сервиса Workflow приведены в документации по администрированию модуля _{wf}_, в разделе xref:6.1@workflow:admin:install.adoc#account[Создание учётной записи для сервиса Workflow].
 +
-Инструкция по настройке почты приведена в документации модуля _{wf}_, в разделе "xref:dev@workflow:admin:mail-settings.adoc[]".
+Инструкция по настройке почты приведена в документации модуля _{wf}_, в разделе "xref:6.1@workflow:admin:mail-settings.adoc[]".
 +
 . Нажмите на кнопку *Завершить*, чтобы закрыть мастер настройки БД.

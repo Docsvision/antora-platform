@@ -5,8 +5,6 @@ prerelease: true
 title: Платформа
 asciidoc:
   attributes:
-    dvcm: 'Docsvision CardManager'
-    es-v: '7.14.0'
     latest-platform: '6.1'
     latest-baseobjects: '6.1'
     latest-workflow: '6.1'
@@ -20,16 +18,14 @@ asciidoc:
     serv-3: '2016  (Standard, DataCenter)'
     serv-4: '2019  (Standard, DataCenter)'
     serv-demo: 'Windows 8/8.1 (64-разрядная) или Windows 10 (64-разрядная)'
-    w-client-1: '7 SP 1 (Enterprise, Professional, Ultimate)'
-    w-client-2: '8/8.1 (Pro, Enterprise)footnote:[Работа в ОС Windows 8 поддерживается только в режиме "Рабочего стола". Работа в режиме Metro, в том числе в Metro-Internet Explorer, не поддерживается.]'
-    w-client-3: '10 (Pro, Enterprise)'
-    w-client-4: '11 (Pro, Enterprise)'
-    iis: 'IIS версий 7.5, 8.0, 8.5 или 10'
     ms: 'Microsoft'
     is-service: ''
     ldap-pl-v: '6.1. сборка 380 и выше'
     ldap-wc-v: '6.1. сборка 735 и выше'
+    no-image: ''
+    old-console: 'yes'
     pl-migr-req: '6.1. сборка 416 и выше'
+    config: '`/usr/lib/docsvision/platform/appsettings.json` для Linux и `C:\Program Files\Docsvision\Platform\appsettings.json` для Windows'
 
 nav:
 - modules/ROOT/nav.adoc

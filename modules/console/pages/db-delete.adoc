@@ -1,4 +1,12 @@
+:with-console: yes
+:with-config: no
+:do-what: варианты удалить БД из системы
+:link: "xref:6.2@mgmtconsole:servers:db-delete.adoc[]"
+:cns-section: Базы данных
+
 = Удалить базу данных {dv}
+
+include::admin:partial$mancons.adoc[]
 
 Если база данных {dv} больше не используется, она может быть удалена из системы управления базами данных.
 

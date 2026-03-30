@@ -1,3 +1,5 @@
+:os1: Astra Linux
+
 [tabs]
 ====
 {os1}::
@@ -8,7 +10,12 @@
 {os2}::
 +
 [subs=attributes]
- $ sudo dnf remove package docsvision-{wt}
+ $ sudo dnf remove docsvision-{wt}
+
+{os3}::
++
+[subs=attributes]
+ $ sudo apt-get remove docsvision-{wt}
 
 ====
 
