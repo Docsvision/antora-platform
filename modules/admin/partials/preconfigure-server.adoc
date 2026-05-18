@@ -1,3 +1,5 @@
+= Предварительная настройка сервера
+
 [#preconfigureSystem]
 == Подготовка к установке
 
@@ -5,56 +7,60 @@
 +
 [source,powershell]
 ----
-Install-WindowsFeature -Source D:\sources\sxs -Name 'Web-Default-Doc','Web-Dir-Browsing','Web-Http-Errors','Web-Static-Content','Web-Http-Redirect','Web-Http-Logging','Web-Stat-Compression','Web-Filtering','Web-Basic-Auth','Web-Windows-Auth','Web-Net-Ext','Web-Net-Ext45','Web-AppInit','Web-Asp-Net45','Web-ISAPI-Ext','Web-ISAPI-Filter','Web-WebSockets','Web-Mgmt-Console','Web-Metabase','Web-Lgcy-Mgmt-Console','NET-Framework-Core','NET-Framework-45-Core','NET-Framework-45-ASPNET','NET-WCF-HTTP-Activation45','NET-WCF-TCP-PortSharing45','WAS-Process-Model','WAS-Config-APIs'
+Install-WindowsFeature -Source D:\sources\sxs -Name 'Web-Default-Doc','Web-Dir-Browsing','Web-Http-Errors','Web-Static-Content','Web-Http-Redirect','Web-Http-Logging','Web-Stat-Compression','Web-Filtering','Web-Basic-Auth','Web-Windows-Auth','Web-Net-Ext','Web-Net-Ext45','Web-AppInit','Web-Asp-Net45','Web-ISAPI-Ext','Web-ISAPI-Filter','Web-WebSockets','Web-Mgmt-Console','Web-Metabase','NET-Framework-Core','NET-Framework-45-Core','NET-Framework-45-ASPNET','NET-WCF-HTTP-Activation45','NET-WCF-TCP-PortSharing45','WAS-Process-Model','WAS-Config-APIs'
 ----
 +
-Если установка выполняется через графический интерфейс _Мастера добавления ролей и компонентов_, включите следующие компоненты:
+Если установка выполняется через графический интерфейс _Мастера добавления ролей и компонентов_, включите следующие компоненты (иерархия и названия соответствуют оснастке):
 +
 --
-* Компоненты IIS (роли):
+* **Веб-сервер (IIS)** > **Службы ролей**:
 +
-NOTE: В мастере ролей и компонентов пункты из этого списка (кроме отмеченных отдельно) находятся внутри ветки `Веб-сервер (IIS) → Службы ролей → Разработка приложений (Application Development)`.
-+
-** Default Document / Документ по умолчанию.
-** Directory Browsing / Просмотр каталога.
-** HTTP Errors / Ошибки HTTP.
-** Static Content / Статическое содержимое.
-** HTTP Redirection / Перенаправление HTTP.
-** HTTP Logging / Ведение журнала HTTP.
-** Static Content Compression / Сжатие статического содержимого.
-** Request Filtering / Фильтрация запросов.
-** Windows Authentication / Проверка подлинности Windows.
-** Basic Authentication / Обычная проверка подлинности.
-** Application Initialization / Инициализация приложений.
-** ISAPI Extensions / Расширения ISAPI.
-** ISAPI Filters / Фильтры ISAPI.
-** WebSocket Protocol / Протокол WebSocket.
-** IIS Management Console / Консоль управления IIS (находится в корне роли `Веб-сервер (IIS)` → `Средства управления`).
-** IIS 6 Metabase Compatibility / Совместимость конфигурации метабазы.
-** IIS 6 Management Console / Консоль управления IIS 6.
---
-+
---
-* Компоненты .NET Framework:
-** .NET Framework {net-v2}.
-** .NET Framework {net-v1} (или выше).
-** .NET Extensibility 3.5 (соответствует `Web-Net-Ext`).
-** .NET Extensibility 4.6 (или выше, соответствует `Web-Net-Ext45`).
-** ASP.NET 4.6 (или выше, соответствует `Web-Asp-Net45`).
---
-+
---
-* Компоненты активации WCF и WAS:
-** HTTP Activation / Активация по HTTP.
-** TCP Port Sharing / Совместное использование портов TCP.
-** Процессная модель Windows Activation Service / Windows Process Activation Service.
-** API конфигурации Windows Activation Service.
+** **Common HTTP Features / Общие HTTP-функции**:
+*** Default Document / Документ по умолчанию.
+*** Directory Browsing / Просмотр каталога.
+*** HTTP Errors / Ошибки HTTP.
+*** Static Content / Статическое содержимое.
+*** HTTP Redirection / Перенаправление HTTP.
+** **Health and Diagnostics / Состояние и диагностика**:
+*** HTTP Logging / Ведение журнала HTTP.
+** **Performance / Производительность**:
+*** Static Content Compression / Сжатие статического содержимого.
+** **Security / Безопасность**:
+*** Request Filtering / Фильтрация запросов.
+*** Basic Authentication / Обычная проверка подлинности.
+*** Windows Authentication / Проверка подлинности Windows.
+** **Application Development / Разработка приложений**:
+*** .NET Extensibility 3.5.
+*** .NET Extensibility 4.8 (или выше).
+*** Application Initialization / Инициализация приложений.
+*** ASP.NET 4.8 (или выше).
+*** ISAPI Extensions / Расширения ISAPI.
+*** ISAPI Filters / Фильтры ISAPI.
+*** WebSocket Protocol / Протокол WebSocket.
+** **Management Tools / Средства управления**:
+*** IIS Management Console / Консоль управления IIS.
+*** **IIS 6 Management Compatibility / Совместимость управления IIS 6**:
+**** IIS 6 Metabase Compatibility / Совместимость конфигурации метабазы IIS 6.
 --
 +
 --
-* Подробная инструкция по добавлению ролей и компонентов доступна в интернете:
-** https://docs.microsoft.com/ru-ru/windows-server/administration/server-manager/install-or-uninstall-roles-role-services-or-features#see-also[Для Windows Server.]
-** https://www.windowscentral.com/how-manage-optional-features-windows-10[Для других версий Windows].
+* **.NET Framework 3.5 Features / Компоненты .NET Framework 3.5**footnote:[Для {dv} требуется {net-v2} и выше.]:
+** .NET Framework 3.5 (includes .NET 2.0 and 3.0). / Компоненты .NET Framework (включает .NET 2.0 и 3.0)
+* **.NET Framework 4.5 Features / Компоненты .NET Framework 4.6 (или выше)**footnote:[Для {dv} требуется {net-v1} и выше.]:
+** .NET Framework 4.5.
+** ASP.NET 4.8footnote:[Для {dv} требуется {asp} и выше.]
+** **WCF Services / Службы WCF**:
+*** HTTP Activation / Активация по HTTP.
+*** TCP Port Sharing / Совместное использование портов TCP.
+* **Windows Process Activation Service / Служба активации Windows**:
+** Process Model / Процессная модель.
+** Configuration APIs / API конфигурации.
+--
++
+--
+.Подробная инструкция по добавлению ролей и компонентов доступна в интернете:
+* https://docs.microsoft.com/ru-ru/windows-server/administration/server-manager/install-or-uninstall-roles-role-services-or-features#see-also[Для Windows Server.]
+* https://www.windowscentral.com/how-manage-optional-features-windows-10[Для других версий Windows.]
 --
 +
 . Убедитесь, что в Windows существует группа безопасности _IIS_IUSRS_ (создаётся при установке IIS). Если такой группы нет, создайте её самостоятельно и добавьте в неё пользователей: _NETWORK SERVICE_, _SERVICE_, _SYSTEM_, _IUSR_.
