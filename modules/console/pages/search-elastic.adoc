@@ -14,9 +14,7 @@
 
 . Загрузите систему {es}.
 +
-* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-v}[с сайта {es}]
-// или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке]
-и установите на компьютер. При установке не изменяйте настройки по умолчанию.
+* Для ОС Windows загрузите инсталлятор https://www.elastic.co/downloads/past-releases/elasticsearch-{es-link}[с сайта {es}] и установите на компьютер. При установке не изменяйте настройки по умолчанию.
 +
 WARNING: Рекомендуемая версия: {es} {es-v}. Работоспособность с более высокими версиями не тестировалась.
 +
@@ -35,8 +33,7 @@ Astra Linux::
 +
 При желании можно использовать настроенное зеркало репозитория с пакетами {es}.
 +
-. Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с сайта {es}.
-// или https://cloud.mail.ru/public/EA3t/5VLu9GyGj[по данной ссылке].
+. Скачайте вручную и установите компонент "Ingest Attachment Processor" (позволяет индексировать файлы карточек) для {es} версии {es-v} с https://artifacts.elastic.co/downloads/elasticsearch-plugins/ingest-attachment/ingest-attachment-{es-v}.zip[сайта {es}].
 +
 . Создайте папку `hunspell` с подпапками `en_US` и `ru_RU` в директории:
 +
