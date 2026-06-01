@@ -24,10 +24,12 @@ WARNING: Рекомендуемая версия: {es} {es-v}. Работосп�
 ====
 Astra Linux::
 +
+[subs="specialchars,attributes,quotes"]
  $ sudo dpkg -i elasticsearch-{es-v}-amd64.deb
 
 РЕД ОС::
 +
+[subs="specialchars,attributes,quotes"]
  $ sudo rpm -i elasticsearch-{es-v}-x86_64.rpm
 ====
 +
