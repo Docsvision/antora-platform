@@ -86,41 +86,18 @@ include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
 В журнале ведётся протоколирование событий программы _{cns}_ и всех операций, выполняемых через программу.
 
 [#file]
-== Журнал работы файлового сервиса
+== Журнал работы {of-fs}
 
-В данный журнал сохраняется информация об ошибках работы файлового сервиса {dv}, а также информационные сообщения (если включено).
+В данный журнал сохраняется информация об ошибках работы {of-fs} {dv}, а также информационные сообщения (если включено).
 
-Журнал сервера является средством диагностики при возникновении нештатных ситуаций и предназначен для передачи в службу технической поддержки {dv}. По умолчанию журнал сервиса сохраняется в папку `/var/log/docsvision/fileservice` в Linux и `C:\ProgramData\docsvision\fileService\fileservice.log` в Windows. Путь к журналу и уровень журналирования можно настроить в конфигурационном файле Сервера приложений (модуля {pl}).
+:of-what: {of-fs}
+:version: {fs-log-req}
+include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 
-:module-service: {of-fs}
-include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
+[subs="specialchars,attributes,quotes"]
+Журналирование с использованием NLog по умолчанию работает, когда в конфигурационном файле {config-fs} указаны настройки NLog. Если настройки в конфигурационном файле не указаны, журналирование будет работать по прежнему принципу.
 
-.Фрагмент конфигурационного файла {of-fs}:
-[source,json]
-----
-{
-  "NLog": {
-    "targets": {
-      "logFile": {
-        "type": "File",
-        "fileName": "${gdc:baseLogFolder}/docsvision/fileservice/${shortdate}.log", <.>
-        "layout": "${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}"
-      }
-    },
-    "rules": [
-      {
-        "logger": "*",
-        "minLevel": "Warn", <.>
-        "writeTo": "logFile"
-      }
-    ]
-  }
-}
-----
-<.> Путь к файлу журнала настраивается в параметре `\{gdc:baseLogFolder}`. По умолчанию используется каталог `/var/log/docsvision/fileservice` в Linux и `C:\ProgramData\docsvision\fileService\fileservice.log` в Windows.
-<.> Уровень журналирования, по умолчанию используется `Warn`.
-
-Подробнее настройка журналирования {of-fs} описана в разделе "xref:file-service-logging.adoc[Настройка протоколирования работы файлового сервиса {dv}]".
+Пути к журналам, уровень и режим журналирования настраиваются в конфигурационном файле по адресу {config-fs}.
 
 [#appserv-requests]
 == Протоколирование запросов сервера приложений

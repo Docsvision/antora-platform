@@ -1,60 +1,116 @@
+:of-what: {of-fs}
+:version: модуля {pl} {pl-log-req}
+
 = Настроить протоколирование работы файлового сервиса
 
-Работа службы Файлового сервиса {dv} протоколируется со следующими параметрами по умолчанию:
+:module-service: {of-fs}
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
 
-.Если для сервера {dv} включено протоколирование работы:
-* Файл журнала: `/var/log/docsvision/fileservice/`.
-* Уровень логирования: `уровень-логирования-сервера`.
+include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 
 .Чтобы изменить настройки:
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]
-Отредактируйте параметр `"NLog":` в конфигурационном файле файлового сервиса {config-fs}.
+Отредактируйте параметр `"NLog":` в конфигурационном файле Сервера приложений, {config-fs}.
 +
-Журнал формируется, если в конфигурационном файле {of-fs}, внутри секции `nlog`, указаны уровни журналирования. Ниже приведён пример, где уровень журналирования указывается словом, а не цифрой, `minlevel="Warn"`:
+Журнал формируется, если в конфигурационном файле Сервера приложений ({of-fs}), внутри секции `NLog`, указаны уровни журналирования:
 +
---
-.Фрагмент конфигурационного файла службы {of-fs}:
+.Фрагмент конфигурационного файла {of-fs}:
 [source,json]
 ----
 {
-  "DocsVision": {
-    "Platform": {
-      "Server": {
-        "Databases": {
-          "alias": "Initial Catalog=DBname; Data Source=database.server.com; User ID=user; Password=qwerty" <.>
-        }
-      }
-    }
-  },
   "NLog": {
-    "targets": {
-      "logFile": {
-        "type": "File",
-        "fileName": "${gdc:baseLogFolder}/docsvision/fileservice/${shortdate}.log",
-        "layout": "${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}"
+    "throwConfigExceptions": true,
+    "extensions": [
+      { "assembly": "NLog.Extensions.Logging" },
+      { "assembly": "NLog.Web.AspNetCore" }
+    ],
+    "variables": {
+      "fileLogLevel": "${environment:DV_FILE_LOG_LEVEL:default=Error}",
+      "consoleLogLevel": "${environment:DV_CONSOLE_LOG_LEVEL:default=Info}",
+      "enableFileLogging": "${environment:DV_ENABLE_FILE_LOGGING:default=false}",
+      "enableConsoleLogging": "${environment:DV_ENABLE_CONSOLE_LOGGING:default=true}",
+      "jsonFileLayout": {
+        "type": "JsonLayout",
+        "includeAllProperties": true,
+        "attributes": [
+          {
+            "name": "timestamp",
+            "layout": "${date:format=yyyy-MM-dd HH\\:mm\\:ss.fff}"
+          },
+          {
+            "name": "level",
+            "layout": "${level:upperCase=true}"
+          },
+          {
+            "name": "module",
+            "layout": "${logger}"
+          },
+          {
+            "name": "message",
+            "layout": "${message:withexception=true}"
+          }
+        ]
       }
+    },
+    "targets": {
+      "async": true,
+      "logConsole": {
+        "type": "Console",
+        "layout": {
+          "type": "JsonLayout",
+          "includeAllProperties": true,
+          "indentJson": true,
+          "attributes": [
+            {
+              "name": "timestamp",
+              "layout": "${date:format=yyyy-MM-dd HH\\:mm\\:ss.fff}"
+            },
+            {
+              "name": "level",
+              "layout": "${level:upperCase=true}"
+            },
+            {
+              "name": "module",
+              "layout": "${logger}"
+            },
+            {
+              "name": "message",
+              "layout": "${message:withexception=true}",
+              "encode": false
+            }
+          ]
+        }
+      },
     },
     "rules": [
       {
+        "logger": "Microsoft.*",
+        "maxlevel": "Warn",
+        "final": true
+      },
+      {
+        "logger": "DatabaseManager.Logger.*",
+        "minLevel": "Info",
+        "writeTo": "logDatabaseManagerFile",
+        "final": true
+      },
+      {
         "logger": "*",
-        "minLevel": "Warn", <.>
-        "writeTo": "logFile"
+        "minlevel": "${when:when='${var:enableFileLogging}' == 'true':inner=${var:fileLogLevel}:else=Off}",
+        "writeTo": "logAppServerFile"
+      },
+      {
+        "logger": "*",
+        "minlevel": "${when:when='${var:enableConsoleLogging}' == 'true':inner=${var:consoleLogLevel}:else=Off}",
+        "writeTo": "logConsole"
       }
     ]
-  }
+  },
 }
 ----
-<.> Строка подключения к базе данных {dv}.
-<.> Уровень журналирования по умолчанию -- "Warn".
---
-+
-Дополнительная информация по настройке журналирования приведена https://nlog-project.org[на сайте] компонента NLog.
-+
-. Перезапустите файловый сервис {dv}.
-+
-[WARNING]
-====
-Учётная запись файлового сервиса {dv} должна обладать правами на создание, изменение и чтение файла журнала.
-====
+<.> Путь к файлу журнала настраивается в параметре `\{gdc:baseLogFolder}`. По умолчанию используется каталог `/var/log/docsvision/fileservice` в Linux и `C:\ProgramData\docsvision\fileService\fileservice.log` в Windows.
+<.> Уровень журналирования, по умолчанию используется `Warn`.
+
+include::GBL-3610@engineer:ROOT:partial$modes-archivation-redefine.adoc[]
