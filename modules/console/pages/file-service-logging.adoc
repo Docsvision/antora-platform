@@ -14,8 +14,6 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 [subs="specialchars,attributes,quotes"]
 Отредактируйте параметр `"NLog":` в конфигурационном файле Сервера приложений, {config-fs}.
 +
-Журнал формируется, если в конфигурационном файле Сервера приложений ({of-fs}), внутри секции `NLog`, указаны уровни журналирования:
-+
 .Фрагмент конфигурационного файла {of-fs}:
 [source,json]
 ----
@@ -35,26 +33,11 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
         "type": "JsonLayout", <.>
         "includeAllProperties": true, <.>
         "attributes": [ <.>
-          {
-            "name": "timestamp", <.>
-            "layout": "${date:format=yyyy-MM-dd HH\\:mm\\:ss.fff}" <.>
-          },
-          {
-            "name": "level",
-            "layout": "${level:upperCase=true}"
-          },
-          {
-            "name": "module",
-            "layout": "${logger}"
-          },
-          {
-            "name": "message",
-            "layout": "${message:withException=true}"
-          },
-          {
-            "name": "processId",
-            "layout": "${processid}"
-          }
+          { "name": "timestamp", "layout": "${date:format=yyyy-MM-dd HH\\:mm\\:ss.fff}" }, <.>
+          { "name": "level", "layout": "${level:upperCase=true}" }, <.>
+          { "name": "module", "layout": "${logger}" },
+          { "name": "message", "layout": "${message:withException=true}" },
+          { "name": "processId", "layout": "${processid}" }
         ]
       }
     },
@@ -62,11 +45,11 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
       "async": true, <.>
       "logFile": { <.>
         "type": "File", <.>
-        "fileName": "${gdc:baseLogFolder}/${gdc:moduleName}/${gdc:moduleName}.log", <.>
+        "fileName": "${gdc:docsvisionLogFolder}/${gdc:moduleName}/${gdc:moduleName}.log", <.>
         "layout": "${var:jsonLayout}", <.>
         "archiveEvery": "Day", <.>
         "archiveAboveSize": 314572800, <.>
-        "archiveFileName": "${gdc:baseLogFolder}/${gdc:moduleName}/archives/${gdc:moduleName} {#}.log", <.>
+        "archiveFileName": "${gdc:docsvisionLogFolder}/${gdc:moduleName}/archives/${gdc:moduleName} {#}.log", <.>
         "archiveNumbering": "DateAndSequence", <.>
         "archiveDateFormat": "yyyy-MM-dd", <.>
         "maxArchiveFiles": 30, <.>
@@ -85,16 +68,16 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
       },
       {
         "logger": "*",
-        "minLevel": "${when:when='${var:enableFileLogging}' == 'true':inner=${var:fileLogLevel}:else=Off}",
+        "minLevel": "${when:when='${var:enableFileLogging:lowercase=true}' == 'true':inner=${var:fileLogLevel}:else=Off}",
         "writeTo": "logFile"
       },
       {
         "logger": "*",
-        "minLevel": "${when:when='${var:enableConsoleLogging}' == 'true':inner=${var:consoleLogLevel}:else=Off}",
+        "minLevel": "${when:when='${var:enableConsoleLogging:lowercase=true}' == 'true':inner=${var:consoleLogLevel}:else=Off}",
         "writeTo": "logConsole"
       }
     ]
-  },
+  }
 }
 ----
 <.> `throwConfigExceptions` -- определяет поведение приложения при обнаружении ошибок в конфигурации NLog.
