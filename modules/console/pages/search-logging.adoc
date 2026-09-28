@@ -6,7 +6,7 @@
 :module-service: полнотекстового индексирования
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
 
-По умолчанию журнал сообщений сервиса полнотекстового поиска сохраняется в директории `/var/log/docsvision/fulltextservice.log` в Linux и `C:\ProgramData\docsvision\fulltextservice.log` в Windows.
+По умолчанию журнал сообщений сервиса полнотекстового индексирования сохраняется в директории `/var/log/docsvision/fulltextservice.log` в Linux и `C:\ProgramData\docsvision\fulltextservice.log` в Windows.
 
 :of-what: Сервиса полнотекстового индексирования
 :version: Сервиса полнотекстового индексирования {ft-log-req}
