@@ -3,6 +3,11 @@
 [subs="specialchars,attributes,quotes"]
 События сервиса регистрируются в журнале работы. Расположение журнала, а также параметры журналирования настраиваются в конфигурационном файле {config-ft} в секции `NLog`.
 
+:module-service: полнотекстового индексирования
+include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]
+
+По умолчанию журнал сообщений сервиса полнотекстового поиска сохраняется в директории `/var/log/docsvision/fulltextservice.log` в Linux и `C:\ProgramData\docsvision\fulltextservice.log` в Windows.
+
 :of-what: Сервиса полнотекстового индексирования
 :version: Сервиса полнотекстового индексирования {ft-log-req}
 
