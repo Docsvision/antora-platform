@@ -1,7 +1,7 @@
 :of-what: {of-fs}
 :version: модуля {fs} {fs-log-req}
 
-= Настроить протоколирование работы файлового сервиса
+= Журнал работы файлового сервиса
 
 :module-service: {of-fs}
 include::6.1@webclient:admin:partial$excerpts.adoc[tags=no-rights]

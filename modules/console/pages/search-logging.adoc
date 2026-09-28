@@ -1,4 +1,4 @@
-= Протоколирование работы сервиса полнотекстового индексирования
+= Журнал работы сервиса полнотекстового индексирования
 
 [subs="specialchars,attributes,quotes"]
 События сервиса регистрируются в журнале работы. Расположение журнала, а также параметры журналирования настраиваются в конфигурационном файле {config-ft} в секции `NLog`.
@@ -21,9 +21,8 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 ----
 {
   "NLog": {
-    "throwConfigExceptions": true, <.>
+    "throwConfigExceptions": false, <.>
     "extensions": [ <.>
-      { "assembly": "DocsVision.AppServer" },
       { "assembly": "NLog.Extensions.Logging" },
       { "assembly": "NLog.Web.AspNetCore" }
     ],
@@ -55,28 +54,13 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
           {
             "name": "processId",
             "layout": "${processid}"
-          },
-          {
-            "name": "dbProcessId",
-            "layout": "${mdlc:item=ProcessId}",
-            "includeEmptyValue": false
-          },
-          {
-            "name": "dbMode",
-            "layout": "${mdlc:item=Mode}",
-            "includeEmptyValue": false
-          },
-          {
-            "name": "dbAlias",
-            "layout": "${mdlc:item=DBAlias}",
-            "includeEmptyValue": false
           }
         ]
       }
     },
     "targets": { <.>
       "async": true, <.>
-      "logAppServerFile": { <.>
+      "logFile": { <.>
         "type": "File", <.>
         "fileName": "${gdc:docsvisionLogFolder}/${gdc:moduleName}/${gdc:moduleName}.log", <.>
         "layout": "${var:jsonLayout}", <.>
@@ -91,12 +75,6 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
       "logConsole": { <.>
         "type": "Console",
         "layout": "${var:jsonLayout}"
-      },
-      "logDatabaseManagerFile": { <.>
-        "type": "File",
-        "fileName": "${gdc:docsvisionLogFolder}/${gdc:databaseManagerModuleName}/${when:when='${mdlc:ProcessId}'!='':inner=${gdc:databaseManagerModuleName}_${mdlc:ProcessId}_${mdlc:Mode}_${mdlc:DBAlias}.log:else=${gdc:databaseManagerModuleName}.log}",
-        "layout": "${var:jsonLayout}",
-        "encoding": "utf-16"
       }
     },
     "rules": [ <.>
@@ -106,24 +84,9 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
         "final": true
       },
       {
-        "logger": "DatabaseManager.Logger.*",
-        "minLevel": "${when:when='${var:enableFileLogging:lowercase=true}' == 'true':inner=Info:else=Off}",
-        "writeTo": "logDatabaseManagerFile"
-      },
-      {
-        "logger": "DatabaseManager.Logger.*",
-        "minLevel": "${when:when='${var:enableConsoleLogging:lowercase=true}' == 'true':inner=Info:else=Off}",
-        "writeTo": "logConsole"
-      },
-      {
-        "logger": "DatabaseManager.Logger.*",
-        "minLevel": "Trace",
-        "final": true
-      },
-      {
         "logger": "*",
         "minLevel": "${when:when='${var:enableFileLogging:lowercase=true}' == 'true':inner=${var:fileLogLevel}:else=Off}",
-        "writeTo": "logAppServerFile"
+        "writeTo": "logFile"
       },
       {
         "logger": "*",
@@ -152,7 +115,7 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 <.> `layout` -- значение `$&#123;date:format=yyyy-MM-dd HH\\:mm\\:ss.fff&#125;` задаёт формат отображения времени.
 <.> `targets` -- настройки режимов журналирования.
 <.> `async` -- регулирует асинхронную обработку целей, указанных в этом блоке. Журналирование выполняется в фоновом режиме, не блокируя работу системы, что повышает производительность при высокой нагрузке.
-<.> `logAppServerFile` -- настройки для режима вывода журнала сервера приложений в файл.
+<.> `logFile` -- настройки для режима вывода журнала сервера приложений в файл.
 <.> `type` -- указывает на использование файла.
 <.> `fileName` -- формирует шаблон имени файла, в параметре можно использовать https://github.com/nlog/NLog/wiki/File-target[допустимые для NLog переменные].
 <.> `layout` -- ссылка на общий JSON-формат, определённый в `jsonLayout`.
@@ -164,7 +127,6 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 <.> `maxArchiveFiles` -- максимальное количество архивных файлов, после которого старые файлы будут удаляться. По умолчанию -- `30`.
 <.> `createDirs` -- флаг регулирует автоматическое создание каталогов журналов. Каталоги будут создаваться автоматически, когда флаг в значении `true`.
 <.> `logConsole` -- настройки для режима вывода журнала в stdout/stderr процесса, например _journald_ в терминале Linux. Формат -- тот же JSON, что и для файла.
-<.> `logDatabaseManagerFile` -- настройки для режима вывода журнала менеджера БД в файл. Менеджер БД журналирует операции и ошибки, связанные с использованием системных БД.
 <.> `rules` -- правила журналирования. Определяют, какой логгер (`logger`), с каким уровнем (`minLevel`, `maxLevel`) и в каком режиме (`writeTo`) будет писать сообщения.
 +
 Допустимые уровни протоколирования приведены https://github.com/nlog/NLog/wiki/Configuration-file#log-levels[на странице NLog в GitHub]. +
