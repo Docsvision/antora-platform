@@ -3,33 +3,174 @@
 [subs="specialchars,attributes,quotes"]
 События сервиса регистрируются в журнале работы. Расположение журнала, а также параметры журналирования настраиваются в конфигурационном файле {config-ft} в секции `NLog`.
 
+:of-what: Сервиса полнотекстового индексирования
+:version: Сервиса полнотекстового индексирования {ft-log-req}
+
+Данный журнал содержит информацию о работе сервера {dv}. Журнал сервера является средством диагностики при возникновении нештатных ситуаций и предназначен для передачи в службу технической поддержки {dv}.
+
+include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
+
+.Чтобы изменить настройки:
+. {blank}
++
+[subs="specialchars,attributes,quotes"]
+Отредактируйте параметр `"NLog":` в конфигурационном файле Сервера приложений по адресу {config-pl}.
++
+.Фрагмент конфигурационного файла модуля {pl}:
 [source,json]
 ----
 {
   "NLog": {
-    "targets": {
-      "file": {
-        "type": "File",
-        "fileName": "${gdc:baseLogFolder}/docsvision/fulltext/${shortdate}.log", <.>
-        "layout": "${longdate}|${event-properties:item=EventId_Id}|${uppercase:${level}}|${logger}|${message} ${exception:format=tostring}"
+    "throwConfigExceptions": true, <.>
+    "extensions": [ <.>
+      { "assembly": "DocsVision.AppServer" },
+      { "assembly": "NLog.Extensions.Logging" },
+      { "assembly": "NLog.Web.AspNetCore" }
+    ],
+    "variables": { <.>
+      "fileLogLevel": "Error", <.>
+      "consoleLogLevel": "Error", <.>
+      "enableFileLogging": "true", <.>
+      "enableConsoleLogging": "true", <.>
+      "jsonLayout": { <.>
+        "type": "JsonLayout", <.>
+        "includeAllProperties": true, <.>
+        "attributes": [ <.>
+          {
+            "name": "timestamp",
+            "layout": "${date:format=yyyy-MM-dd HH\\:mm\\:ss.fff}"
+          }, <.>
+          {
+            "name": "level",
+            "layout": "${level:upperCase=true}"
+          }, <.>
+          {
+            "name": "module",
+            "layout": "${logger}"
+          },
+          {
+            "name": "message",
+            "layout": "${message:withException=true}"
+          },
+          {
+            "name": "processId",
+            "layout": "${processid}"
+          },
+          {
+            "name": "dbProcessId",
+            "layout": "${mdlc:item=ProcessId}",
+            "includeEmptyValue": false
+          },
+          {
+            "name": "dbMode",
+            "layout": "${mdlc:item=Mode}",
+            "includeEmptyValue": false
+          },
+          {
+            "name": "dbAlias",
+            "layout": "${mdlc:item=DBAlias}",
+            "includeEmptyValue": false
+          }
+        ]
       }
     },
-    "rules": [
+    "targets": { <.>
+      "async": true, <.>
+      "logAppServerFile": { <.>
+        "type": "File", <.>
+        "fileName": "${gdc:docsvisionLogFolder}/${gdc:moduleName}/${gdc:moduleName}.log", <.>
+        "layout": "${var:jsonLayout}", <.>
+        "archiveEvery": "Day", <.>
+        "archiveAboveSize": 314572800, <.>
+        "archiveFileName": "${gdc:docsvisionLogFolder}/${gdc:moduleName}/archives/${gdc:moduleName} {#}.log", <.>
+        "archiveNumbering": "DateAndSequence", <.>
+        "archiveDateFormat": "yyyy-MM-dd", <.>
+        "maxArchiveFiles": 30, <.>
+        "createDirs": true <.>
+      },
+      "logConsole": { <.>
+        "type": "Console",
+        "layout": "${var:jsonLayout}"
+      },
+      "logDatabaseManagerFile": { <.>
+        "type": "File",
+        "fileName": "${gdc:docsvisionLogFolder}/${gdc:databaseManagerModuleName}/${when:when='${mdlc:ProcessId}'!='':inner=${gdc:databaseManagerModuleName}_${mdlc:ProcessId}_${mdlc:Mode}_${mdlc:DBAlias}.log:else=${gdc:databaseManagerModuleName}.log}",
+        "layout": "${var:jsonLayout}",
+        "encoding": "utf-16"
+      }
+    },
+    "rules": [ <.>
+      {
+        "logger": "Microsoft.*",
+        "maxLevel": "Warn",
+        "final": true
+      },
+      {
+        "logger": "DatabaseManager.Logger.*",
+        "minLevel": "${when:when='${var:enableFileLogging:lowercase=true}' == 'true':inner=Info:else=Off}",
+        "writeTo": "logDatabaseManagerFile"
+      },
+      {
+        "logger": "DatabaseManager.Logger.*",
+        "minLevel": "${when:when='${var:enableConsoleLogging:lowercase=true}' == 'true':inner=Info:else=Off}",
+        "writeTo": "logConsole"
+      },
+      {
+        "logger": "DatabaseManager.Logger.*",
+        "minLevel": "Trace",
+        "final": true
+      },
       {
         "logger": "*",
-        "minLevel": "Warn", <.>
-        "writeTo": "file"
+        "minLevel": "${when:when='${var:enableFileLogging:lowercase=true}' == 'true':inner=${var:fileLogLevel}:else=Off}",
+        "writeTo": "logAppServerFile"
+      },
+      {
+        "logger": "*",
+        "minLevel": "${when:when='${var:enableConsoleLogging:lowercase=true}' == 'true':inner=${var:consoleLogLevel}:else=Off}",
+        "writeTo": "logConsole"
       }
     ]
-  },
+  }
 }
 ----
-<.> Путь к файлу журнала указан в параметре `fileName`.
-<.> Уровень журналирования по умолчанию -- "Warn".
+<.> `throwConfigExceptions` -- определяет поведение приложения при обнаружении ошибок в конфигурации NLog.
++
+Если параметр установлен в `true`, любая ошибка в конфигурации вызовет исключение.
++
+<.> `extensions` -- загружает дополнительные сборки (`.dll`), расширяющие возможности NLog.
+<.> `variables` -- раздел определяет параметры, которые используются в других частях конфигурации.
+<.> `fileLogLevel` -- задаёт уровень журналирования для файла журнала.
+<.> `consoleLogLevel` -- задаёт уровень журналирования для консоли (stdout/stderr).
+<.> `enableFileLogging` -- включает или отключает ведение журнала в файл.
+<.> `enableConsoleLogging` -- включает или отключает ведение журнала в консоль (stdout/stderr).
+<.> `jsonLayout` -- определяет JSON-структуру сообщений журнала.
+<.> `type` -- указывает на использование JSON-макета.
+<.> `includeAllProperties` -- регулирует, будут ли добавляться в вывод все дополнительные свойства, переданные в контексте журналирования.
+<.> `attributes` -- раздел с парными параметрами вида `"name"`/`"layout"`, определяющий поля JSON.
+<.> `name` -- значение `timestamp` добавляет отметку времени.
+<.> `layout` -- значение `$&#123;date:format=yyyy-MM-dd HH\\:mm\\:ss.fff&#125;` задаёт формат отображения времени.
+<.> `targets` -- настройки режимов журналирования.
+<.> `async` -- регулирует асинхронную обработку целей, указанных в этом блоке. Журналирование выполняется в фоновом режиме, не блокируя работу системы, что повышает производительность при высокой нагрузке.
+<.> `logAppServerFile` -- настройки для режима вывода журнала сервера приложений в файл.
+<.> `type` -- указывает на использование файла.
+<.> `fileName` -- формирует шаблон имени файла, в параметре можно использовать https://github.com/nlog/NLog/wiki/File-target[допустимые для NLog переменные].
+<.> `layout` -- ссылка на общий JSON-формат, определённый в `jsonLayout`.
+<.> `archiveEvery` -- создавать новый архивный файл каждый заданный период, по умолчанию -- каждый день.
+<.> `archiveAboveSize` -- если текущий файл превышает `300` Мб (значение по умолчанию), он будет немедленно архивирован, даже если заданный в `archiveEvery` период не завершился.
+<.> `archiveFileName` -- шаблон имени для архивов, `&#123;#&#125;` заменяется на номер архива.
+<.> `archiveNumbering` -- значение `DateAndSequence` задаёт нумерацию архивов по дате и порядковому номеру (например, `MyLog 2026-09-09 1.log`).
+<.> `archiveDateFormat` -- задаёт формат даты, которая подставляется в имя архивного файла при архивации журнала.
+<.> `maxArchiveFiles` -- максимальное количество архивных файлов, после которого старые файлы будут удаляться. По умолчанию -- `30`.
+<.> `createDirs` -- флаг регулирует автоматическое создание каталогов журналов. Каталоги будут создаваться автоматически, когда флаг в значении `true`.
+<.> `logConsole` -- настройки для режима вывода журнала в stdout/stderr процесса, например _journald_ в терминале Linux. Формат -- тот же JSON, что и для файла.
+<.> `logDatabaseManagerFile` -- настройки для режима вывода журнала менеджера БД в файл. Менеджер БД журналирует операции и ошибки, связанные с использованием системных БД.
+<.> `rules` -- правила журналирования. Определяют, какой логгер (`logger`), с каким уровнем (`minLevel`, `maxLevel`) и в каком режиме (`writeTo`) будет писать сообщения.
++
+Допустимые уровни протоколирования приведены https://github.com/nlog/NLog/wiki/Configuration-file#log-levels[на странице NLog в GitHub]. +
+Для получения дополнительной информации о других настройках NLog обратитесь к документации по данной платформе.
 
-По умолчанию файлы журнала сохраняются в каталог `/var/log/docsvision/fulltextservice`. Новый журнал создаётся после истечения заданного интервала времени. Каждый день журнал сохраняется в архив. Максимальное число сохраненных архивов 30.
-
-Дополнительная информация по настройке журналирования приведена https://nlog-project.org[на сайте] компонента NLog.
+include::GBL-3610@engineer:ROOT:partial$modes-archivation-redefine.adoc[]
 
 // tag::index-status[]
 [#indexing-status]
