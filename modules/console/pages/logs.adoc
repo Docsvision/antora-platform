@@ -178,6 +178,7 @@ include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 Допустимые уровни протоколирования приведены https://github.com/nlog/NLog/wiki/Configuration-file#log-levels[на странице NLog в GitHub]. +
 Для получения дополнительной информации о других настройках NLog обратитесь к документации по данной платформе.
 
+:exception: y
 include::GBL-3610@engineer:ROOT:partial$modes-archivation-redefine.adoc[]
 
 [NOTE]
