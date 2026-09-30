@@ -6,6 +6,8 @@
 :mod-log-req: {pl-log-req}
 :mod: Платформы
 :link: platform:console:logs
+:link-json-log: xref:console:logs#json-log[актуального формата JSON]
+:link-text-log: xref:console:logs#text-log[прежнего текстового формата]
 
 = Обновление модуля
 

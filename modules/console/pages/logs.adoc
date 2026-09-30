@@ -17,7 +17,8 @@
 
 include::GBL-3610@engineer:ROOT:partial$excerpts.adoc[tags=nlog-json]
 
-.Чтобы изменить настройки:
+[#json-log]
+.Чтобы настроить и применить журналирование в формате JSON:
 . {blank}
 +
 [subs="specialchars,attributes,quotes"]
@@ -185,6 +186,93 @@ include::GBL-3610@engineer:ROOT:partial$modes-archivation-redefine.adoc[]
 
 Ошибка возникает из-за наличия модуля _Конструктор отчетов_, несовместимого с {dv} текущей версии. Обработка запросов от данного модуля будет отключена.
 ====
+
+[#text-log]
+=== Журналирование в текстовом формате
+
+[subs="specialchars,attributes,quotes"]
+Начиная с {version}, чтобы настроить журналирование в текстовом формате, требуется выполнить следующие настройки в конфигурационном файле {config-pl}:
+
+[source,json]
+----
+{
+  "NLog": {
+    "throwConfigExceptions": true, <.>
+    "variables": { <.>
+      "logFileCreatedAt": "${processinfo:property=StartTime:format=yyyy'Y'MM'M'dd'D' HH'h'mm'm'ss's'}" <.>
+    },
+    "targets": { <.>
+      "logFile": { <.>
+        "type": "File", <.>
+        "fileName": "${gdc:baseLogFolder}/docsvision/platform/dvappserver ${var:logFileCreatedAt} PID ${processid}.log", <.>
+        "layout": "${logger} ${level}: ${event-properties:item=EventId:whenEmpty=0} : ${message}${onexception:inner=${newline}${exception:format=tostring}}${newline}    ProcessId=${processid}${newline}    DateTime=${date:format=o}${newline}", <.>
+        "encoding": "utf-8", <.>
+        "writeBom": true, <.>
+        "createDirs": true, <.>
+        "keepFileOpen": false, <.>
+        "concurrentWrites": true <.>
+      },
+      "logConsole": { <.>
+        "type": "Console",
+        "layout": "${level}: ${logger}[${event-properties:item=EventId:whenEmpty=0}] ${message}${onexception:inner=${newline}${exception:format=tostring}}"
+      },
+      "logDatabaseManagerFile": { <.>
+        "type": "File",
+        "fileName": "${gdc:baseLogFolder}/docsvision/databasemanager/${when:when=equals('${logger}','DatabaseManager.Logger.Default'):inner=databasemanager ${var:logFileCreatedAt} PID ${processid}.log:else=databasemanager ${var:logFileCreatedAt} PID ${substring:inner=${scopeproperty:item=ProcessId}:start=0:length=8}-${substring:inner=${scopeproperty:item=ProcessId}:start=8:length=4}-${substring:inner=${scopeproperty:item=ProcessId}:start=12:length=4}-${substring:inner=${scopeproperty:item=ProcessId}:start=16:length=4}-${substring:inner=${scopeproperty:item=ProcessId}:start=20:length=12} ${scopeproperty:item=Mode} ${scopeproperty:item=DBAlias}.log}",
+        "layout": "${date:format=G} ${message}",
+        "encoding": "utf-16",
+        "writeBom": true,
+        "createDirs": true,
+        "keepFileOpen": false,
+        "concurrentWrites": true
+      }
+    },
+    "rules": [ <.>
+      {
+        "logger": "DatabaseManager.Logger.*",
+        "minLevel": "Info",
+        "writeTo": "logDatabaseManagerFile",
+        "final": true
+      },
+      {
+        "logger": "*",
+        "minLevel": "Error",
+        "writeTo": "logFile"
+      },
+      {
+        "logger": "*",
+        "minLevel": "Info",
+        "writeTo": "logConsole"
+      }
+    ]
+  }
+}
+----
+<.> `throwConfigExceptions` -- определяет поведение приложения при обнаружении ошибок в конфигурации NLog.
++
+Если параметр установлен в true, любая ошибка в конфигурации вызовет исключение.
++
+<.> `variables` -- раздел определяет параметры, которые используются в других частях конфигурации.
+<.> `logFileCreatedAt` -- формирует дату и время для имени файла журнала.
+<.> `targets` -- настройки режимов журналирования.
+<.> `logFile` -- настройки для режима вывода журнала в файл.
+<.> `type` -- указывает на использование файла.
+<.> `fileName` -- формирует шаблон имени файла, в параметре можно использовать https://github.com/nlog/NLog/wiki/File-target[допустимые для NLog переменные].
+<.> `layout` -- задаёт текстовый формат сообщений журнала.
+<.> `encoding` -- задаёт кодировку файла журнала -- UTF-8.
+<.> `writeBom` -- если значение `true`, в начало файла записывается маркер порядка байтов (BOM).
+<.> `createDirs` -- флаг регулирует автоматическое создание каталогов журналов. Каталоги будут создаваться автоматически, когда флаг в значении `true`.
+<.> `keepFileOpen` -- при значении `false` файл открывается и закрывается на каждую запись, что позволяет другим процессам обращаться к файлу.
+<.> `concurrentWrites` -- при значении `true` разрешает конкурентную запись в файл из нескольких процессов.
+<.> `logConsole` -- настройки для режима вывода журнала в stdout/stderr процесса, например journald в терминале Linux.
+<.> `logDatabaseManagerFile` -- настройки для режима вывода журнала менеджера БД в файл. Менеджер БД журналирует операции и ошибки, связанные с использованием системных БД.
++
+Имя файла зависит от используемого логгера (`logger`) и свойств области видимости (`ProcessId`, `Mode`, `DBAlias`).
++
+<.> `rules` -- правила журналирования. Определяют, какой логгер, с каким уровнем (`minLevel`, `maxLevel`) и в каком режиме (`writeTo`) будет писать сообщения.
++
+Допустимые уровни протоколирования приведены https://github.com/nlog/NLog/wiki/Configuration-file#log-levels[на странице NLog в GitHub]. +
+Для получения дополнительной информации о других настройках NLog обратитесь к документации по данной платформе.
 
 [#client]
 == Журналы установки клиентских компонентов
