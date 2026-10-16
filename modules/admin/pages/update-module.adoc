@@ -4,7 +4,7 @@
 :update: platform
 :installer: {dv} Platform server.msi
 :mod-log-req: {pl-log-req}
-:mod: Платформы
+:mod: Платформы для Сервера приложений, Менеджера БД, {of-fs} и {of-ft}
 :link: platform:console:logs
 :link-json-log: xref:console:logs#json-log[актуального формата JSON]
 :link-text-log: xref:console:logs#text-log[прежнего текстового формата]
